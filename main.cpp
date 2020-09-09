@@ -10,7 +10,7 @@
 
 extern short sDirection;
 bool gameOver = false;
-
+int score = 0;
 void display_callback();
 void reshape_callback(int,int);
 void timer_callback(int);
@@ -44,7 +44,7 @@ void display_callback(){
 	drawFood();
 	glutSwapBuffers();
 	if (gameOver){
-		std::cout << "GAME OVER " << "Your Score: " << std::endl;
+		std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
 		exit(0);
 	}
 	

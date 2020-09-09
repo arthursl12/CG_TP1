@@ -10,6 +10,7 @@ int foodX, foodY;
 short sDirection = RIGHT;
 int posX[60]={20,20,20,20,20}, posY[60]={20,19,18,17,16};
 extern bool gameOver;
+extern int score;
 bool food=true;
 
 
@@ -81,7 +82,15 @@ void drawSnake(){
 		gameOver = true;
 	}
 	if(posX[0] == foodX && posY[0] == foodY){
+		snake_length++;
+		score++;
+		if(snake_length > MAX)
+			snake_length = MAX;
 		food = true;
+	}
+	for(int j=1;j<snake_length;j++){
+        if(posX[j]==posX[0] && posY[j]==posY[0])
+            gameOver=true;
 	}
 }
 
