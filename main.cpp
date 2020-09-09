@@ -1,5 +1,6 @@
 #include "GL/gl.h"
 #include "GL/glut.h"
+#include <iostream>
 
 #include "game.h"
 
@@ -8,6 +9,7 @@
 #define FPS 10
 
 extern short sDirection;
+bool gameOver = false;
 
 void display_callback();
 void reshape_callback(int,int);
@@ -35,13 +37,17 @@ int main(int argc, char **argv){
 
 }
 
-int index = 0;
 void display_callback(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	drawGrid();
 	drawSnake();
+	drawFood();
 	glutSwapBuffers();
-
+	if (gameOver){
+		std::cout << "GAME OVER " << "Your Score: " << std::endl;
+		exit(0);
+	}
+	
 }
 
 void reshape_callback(int w, int h){
