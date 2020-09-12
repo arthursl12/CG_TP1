@@ -3,8 +3,16 @@
 #include "GL/freeglut.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <iterator>
+
 #include "game.h"
+#include "level.h"
+#include "gObject.h"
+#include "tile.h"
 #include "helper.h"
+
+extern Level lev;
 
 void drawText(float x, float y, std::string text) {
     glRasterPos2f(x, y);
@@ -15,6 +23,10 @@ void display_callback(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	// drawGrid();
 	// drawSnake();
+	std::vector<GameObject*>::iterator it;
+	for (it = lev.objects.begin(); it != lev.objects.end(); it++) { 
+		(*it)->draw();
+    }
 	drawFood();
     drawText(5,5,"HELLO");
 	glutSwapBuffers();

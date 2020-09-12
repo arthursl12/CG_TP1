@@ -11,7 +11,7 @@ LIBS := -lglut -lGL
 INC := -I include
 
 
-MODULES = game helper
+MODULES = game helper gObject tile level
 SOURCES = $(addsuffix .cpp,$(MODULES))
 OBJECTS = $(patsubst %.cpp, %.o, $(SOURCES))
 TESTS = $(addprefix test_,$(SOURCES))
