@@ -23,7 +23,7 @@ void display_callback(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	// drawGrid();
 	// drawSnake();
-	std::vector<GameObject*>::iterator it;
+	std::vector<std::shared_ptr<GameObject>>::iterator it;
 	for (it = lev.objects.begin(); it != lev.objects.end(); it++) { 
 		(*it)->draw();
     }

@@ -1,6 +1,8 @@
 #include "GL/gl.h"
 #include "GL/glut.h"
 #include <iostream>
+#include <memory>
+
 
 #include "constants.h"
 #include "helper.h"
@@ -11,9 +13,9 @@ Level lev;
 
 void init(){
 	glClearColor(0,0,0,1);
-	Tile* t1 = new Tile(2,2,10,10);
+	std::shared_ptr<Tile> t1 = std::make_shared<Tile>(2,2,10,10);
 	lev.objects.push_back(t1);
-	Tile* t2 = new Tile(15,2,10,10);
+	std::shared_ptr<Tile> t2 = std::make_shared<Tile>(15,2,10,10);
 	lev.objects.push_back(t2);
 	// initGrid(COLUMNS, ROWS);
 }
