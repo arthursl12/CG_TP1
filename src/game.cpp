@@ -32,10 +32,10 @@ void drawGrid(){
 void unit(int x, int y){
 	if (x == 0 || y == 0 || x == gridX-1 || y == gridY-1){
 		glLineWidth(3);
-		glColor3f(1,0,0);
+		glColor3f(1,0,0.6);
 	}else{
 		glLineWidth(1);
-		glColor3f(1,1,1);
+		glColor3f(0.5,0.5,0.5);
 	}
 
 	glBegin(GL_LINE_LOOP);

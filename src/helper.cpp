@@ -16,6 +16,7 @@ void display_callback(){
 	drawGrid();
 	// drawSnake();
 	drawFood();
+    drawText(5,5,"HELLO");
 	glutSwapBuffers();
 	if (gameOver){
 		std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
