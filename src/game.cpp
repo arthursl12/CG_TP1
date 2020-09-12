@@ -9,9 +9,9 @@ int snake_length = 5;
 int foodX, foodY;
 short sDirection = RIGHT;
 int posX[60]={20,20,20,20,20}, posY[60]={20,19,18,17,16};
-extern bool gameOver;
-extern int score;
 bool food=true;
+bool gameOver = false;
+int score = 0;
 
 
 void initGrid(int x, int y){
@@ -30,7 +30,6 @@ void drawGrid(){
 }
 
 void unit(int x, int y){
-
 	if (x == 0 || y == 0 || x == gridX-1 || y == gridY-1){
 		glLineWidth(3);
 		glColor3f(1,0,0);
@@ -48,7 +47,6 @@ void unit(int x, int y){
 }
 
 void drawFood(){
-
 	if (food){
 		random(foodX,foodY);
 	}
