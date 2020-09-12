@@ -12,7 +12,7 @@
 
 void init(){
 	glClearColor(0,0,0,1);
-	initGrid(COLUMNS, ROWS);
+	// initGrid(COLUMNS, ROWS);
 }
 
 

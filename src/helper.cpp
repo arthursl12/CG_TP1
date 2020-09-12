@@ -13,15 +13,15 @@ void drawText(float x, float y, std::string text) {
 
 void display_callback(){
 	glClear(GL_COLOR_BUFFER_BIT);
-	drawGrid();
+	// drawGrid();
 	// drawSnake();
 	drawFood();
     drawText(5,5,"HELLO");
 	glutSwapBuffers();
-	if (gameOver){
-		std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
-		exit(0);
-	}
+	// if (gameOver){
+	// 	std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
+	// 	exit(0);
+	// }
 	
 }
 
