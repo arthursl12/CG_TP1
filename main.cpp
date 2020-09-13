@@ -13,10 +13,10 @@ Level lev;
 
 void init(){
 	glClearColor(0,0,0,1);
-	std::shared_ptr<Tile> t1 = std::make_shared<Tile>(2,2,10,10);
-	lev.objects.push_back(t1);
-	std::shared_ptr<Tile> t2 = std::make_shared<Tile>(15,2,10,10);
-	lev.objects.push_back(t2);
+	// std::shared_ptr<Tile> t1 = std::make_shared<Tile>(2,2,2,4);
+	// lev.objects.push_back(t1);
+	// std::shared_ptr<Tile> t2 = std::make_shared<Tile>(6.5,2,2,4);
+	// lev.objects.push_back(t2);
 	// initGrid(COLUMNS, ROWS);
 }
 
