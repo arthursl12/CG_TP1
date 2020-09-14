@@ -10,7 +10,7 @@ Tile::Tile(float _x, float _y, float _height, float _width){
 }
 
 void Tile::draw(){
-    std::cout << this->x << ", " << this->y << std::endl;
+    // std::cout << this->x << ", " << this->y << std::endl;
     glColor3f(1,1,0);
     glRectf(x, y, x+width, y+height);
 }

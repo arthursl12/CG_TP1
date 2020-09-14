@@ -4,14 +4,17 @@
 #define COLUMNS 40
 #define ROWS 40
 
-#define T_COL 5
+#define WINDOW_H 700
+#define WINDOW_W 700
+
+#define T_COL 10
 #define T_ROW 5
-#define TILE_WIDTH 4
-#define TILE_HEIGHT 2
-#define TILE_H_SPACE 0.4
-#define TILE_V_SPACE 0.4
-#define MAP_X 2
-#define MAP_Y 20
+// #define TILE_WIDTH 75
+// #define TILE_HEIGHT 40
+#define TILE_H_SPACE 8
+#define TILE_V_SPACE 8
+// #define MAP_X 8
+#define MAP_Y 450
 
 #define FPS 10
 

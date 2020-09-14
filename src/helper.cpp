@@ -1,6 +1,7 @@
-#include "GL/gl.h"
-#include "GL/glut.h"
-#include "GL/freeglut.h"
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,11 +21,11 @@ void drawText(float x, float y, std::string text) {
 }
 
 void display_callback(){
-	glClear(GL_COLOR_BUFFER_BIT);
+
 	// drawGrid();
 	// drawSnake();
 	std::vector<std::shared_ptr<Tile>>::iterator it1;
-	std::cout << lev.tileMap.size() << std::endl;
+	// std::cout << lev.tileMap.size() << std::endl;
 	for (it1 = lev.tileMap.begin(); it1 != lev.tileMap.end(); it1++) { 
 		(*it1)->draw();
     }
@@ -34,7 +35,7 @@ void display_callback(){
     }
 
 	drawFood();
-    drawText(5,5,"HELLO");
+    drawText(250,250,"HELLO");
 	glutSwapBuffers();
 	// if (gameOver){
 	// 	std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
@@ -44,10 +45,15 @@ void display_callback(){
 }
 
 void reshape_callback(int w, int h){
-	glViewport(0,0,(GLsizei)w,(GLsizei)h);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+	// glViewport(0,0,(GLsizei)w,(GLsizei)h);
+	float deltaW = w - WINDOW_W;
+	float deltaH = h - WINDOW_H;
+	glViewport(deltaW/2, deltaH/2, WINDOW_W, WINDOW_H);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0,COLUMNS,0,ROWS,-1,1);
+	glOrtho(0,WINDOW_W,0,WINDOW_H,-1,1);
 	glMatrixMode(GL_MODELVIEW);
 }
 

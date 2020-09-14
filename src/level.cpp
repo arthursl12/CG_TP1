@@ -1,6 +1,12 @@
 #include "level.h"
+#include <iostream>
+#include <GL/glut.h>
 
 Level::Level(){
+    float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
+    float TILE_HEIGHT = TILE_WIDTH/2;
+    float MAP_X = TILE_H_SPACE - 3;
+    std::cout << TILE_WIDTH << std::endl;
     float curX = MAP_X;
     float curY = MAP_Y;
     for (int i = 0; i < T_ROW; i++){

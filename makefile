@@ -7,7 +7,7 @@ TARGET := main
 
 SRCEXT := cpp
 CFLAGS := -O3 -std=c++14
-LIBS := -lglut -lGL
+LIBS := -lglut -lGL -lGLU
 INC := -I include
 
 
@@ -41,7 +41,7 @@ $(TGTDIR): $(OBJDIR)
 
 comp: $(TGTDIR)
 	$(CC) $(INC) $(CFLAGS) $(OBJDIR) $(TARGET).cpp $(LIBS) -o $(TGTDIR)
-	@./main
+	# @./main
 
 run:
 	@./main

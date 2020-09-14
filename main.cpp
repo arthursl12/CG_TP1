@@ -23,8 +23,10 @@ void init(){
 int main(int argc, char **argv){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(500,500);
-	glutCreateWindow("SNAKE");
+	glutInitWindowSize(WINDOW_W,WINDOW_H);
+	
+	glutCreateWindow("Breakout - OpenGL");
+	std::cout << glutGet(GLUT_WINDOW_WIDTH) << "," << glutGet(GLUT_WINDOW_HEIGHT) << std::endl;
 	glutDisplayFunc(display_callback);
 	glutReshapeFunc(reshape_callback);
 	glutTimerFunc(0,timer_callback,0);
