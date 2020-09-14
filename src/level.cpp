@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include "level.h"
 #include "paddle.h"
+#include "ball.h"
 
 Level::Level(){
     // Carrega o conjunto de tiles
@@ -27,4 +28,9 @@ Level::Level(){
     std::shared_ptr<Paddle> pad = \
                 std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 15);
     this->objects.push_back(pad);
+
+    // Carrega a bola
+    std::shared_ptr<Ball> ball = \
+                std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4);
+    this->objects.push_back(ball);
 }

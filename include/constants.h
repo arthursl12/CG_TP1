@@ -19,6 +19,8 @@
 #define PADDLE_HEIGHT 20
 #define PADDLE_WIDTH 160
 
+#define BALL_SIZE 10
+
 #define FPS 10
 
 extern short sDirection;
