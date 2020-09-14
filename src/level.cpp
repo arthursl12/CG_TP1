@@ -1,12 +1,14 @@
-#include "level.h"
 #include <iostream>
 #include <GL/glut.h>
+#include "level.h"
+#include "paddle.h"
 
 Level::Level(){
+    // Carrega o conjunto de tiles
     float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
     float TILE_HEIGHT = TILE_WIDTH/2;
-    float MAP_X = TILE_H_SPACE - 3;
-    std::cout << TILE_WIDTH << std::endl;
+    float MAP_X = TILE_H_SPACE - 4;
+    // std::cout << TILE_WIDTH << std::endl;
     float curX = MAP_X;
     float curY = MAP_Y;
     for (int i = 0; i < T_ROW; i++){
@@ -20,4 +22,9 @@ Level::Level(){
         curY += TILE_HEIGHT+TILE_V_SPACE;
         curX = MAP_X;
     }
+
+    // Carrega o paddle
+    std::shared_ptr<Paddle> pad = \
+                std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 15);
+    this->objects.push_back(pad);
 }

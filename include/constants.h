@@ -16,6 +16,9 @@
 // #define MAP_X 8
 #define MAP_Y 450
 
+#define PADDLE_HEIGHT 20
+#define PADDLE_WIDTH 160
+
 #define FPS 10
 
 extern short sDirection;
