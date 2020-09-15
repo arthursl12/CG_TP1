@@ -3,9 +3,10 @@
 #include "level.h"
 #include "paddle.h"
 #include "ball.h"
+#include "texto.h"
 
 Level::Level(){
-    // Carrega o conjunto de tiles
+    // Cria o conjunto de tiles
     float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
     float TILE_HEIGHT = TILE_WIDTH/2;
     float MAP_X = TILE_H_SPACE - 4;
@@ -24,13 +25,33 @@ Level::Level(){
         curX = MAP_X;
     }
 
-    // Carrega o paddle
+    // Cria o paddle
     std::shared_ptr<Paddle> pad = \
                 std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 15);
     this->objects.push_back(pad);
 
-    // Carrega a bola
+    // Cria a bola
     std::shared_ptr<Ball> ball = \
                 std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4);
     this->objects.push_back(ball);
+
+    // Cria placar
+    std::string plStr = "Placar: ";
+    int l1 = plStr.size();
+    std::shared_ptr<Texto> placarLabel = \
+                std::make_shared<Texto>(WINDOW_W/6, WINDOW_H-50, plStr);
+    this->textos.push_back(placarLabel);
+    std::shared_ptr<Texto> placar = \
+                std::make_shared<Texto>(WINDOW_W/6 + l1*10, WINDOW_H-50, "100");
+    this->textos.push_back(placar);
+
+    // Cria conta-vidas
+    std::string vdStr = "Vidas: ";
+    int l2 = vdStr.size();
+    std::shared_ptr<Texto> vidasLabel = \
+                std::make_shared<Texto>(3*WINDOW_W/4, WINDOW_H-50, vdStr);
+    this->textos.push_back(vidasLabel);
+    std::shared_ptr<Texto> vidas = \
+                std::make_shared<Texto>(3*WINDOW_W/4 + l2*10, WINDOW_H-50, "3");
+    this->textos.push_back(vidas);
 }

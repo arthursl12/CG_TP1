@@ -21,21 +21,19 @@ void drawText(float x, float y, std::string text) {
 }
 
 void display_callback(){
-
-	// drawGrid();
-	// drawSnake();
 	std::vector<std::shared_ptr<Tile>>::iterator it1;
-	// std::cout << lev.tileMap.size() << std::endl;
 	for (it1 = lev.tileMap.begin(); it1 != lev.tileMap.end(); it1++) { 
 		(*it1)->draw();
-    }
+	}
+
 	std::vector<std::shared_ptr<GameObject>>::iterator it;
 	for (it = lev.objects.begin(); it != lev.objects.end(); it++) { 
 		(*it)->draw();
     }
+	for (it = lev.textos.begin(); it != lev.textos.end(); it++) { 
+		(*it)->draw();
+    }
 
-	drawFood();
-    drawText(250,250,"HELLO");
 	glutSwapBuffers();
 	// if (gameOver){
 	// 	std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
