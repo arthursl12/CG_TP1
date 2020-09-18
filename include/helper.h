@@ -12,5 +12,6 @@ void display_callback();
 void reshape_callback(int,int);
 void timer_callback(int);
 void keyboard_callback(int, int, int);
+void mouse_callback(int x, int y);
 
 #endif /* HELPER_H */

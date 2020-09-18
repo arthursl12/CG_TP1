@@ -76,6 +76,10 @@ void keyboard_callback(int key, int, int){
 	}
 }
 
+void mouse_callback(int x, int y){
+	std::cout << "X: " << x << ", Y: " << y << std::endl;
+}
+
 void timer_callback(int){
 	glutPostRedisplay();
 	glutTimerFunc(1000/FPS,timer_callback,0);

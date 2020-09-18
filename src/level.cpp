@@ -12,7 +12,7 @@ Level::Level(){
     float MAP_X = TILE_H_SPACE - 4;
     // std::cout << TILE_WIDTH << std::endl;
     float curX = MAP_X;
-    float curY = MAP_Y;
+    float curY = WINDOW_H - MAP_OFFSET;
     for (int i = 0; i < T_ROW; i++){
         for (int j = 0; j < T_COL; j++){
             std::shared_ptr<Tile> t = \
