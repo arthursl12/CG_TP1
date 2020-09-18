@@ -4,6 +4,7 @@
 #include "paddle.h"
 #include "ball.h"
 #include "texto.h"
+#include "speedbar.h"
 
 Level::Level(){
     // Cria o conjunto de tiles
@@ -27,12 +28,12 @@ Level::Level(){
 
     // Cria o paddle
     std::shared_ptr<Paddle> pad = \
-                std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 15);
+                std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 55);
     this->objects.push_back(pad);
 
     // Cria a bola
     std::shared_ptr<Ball> ball = \
-                std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4);
+                std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
     this->objects.push_back(ball);
 
     // Cria placar
@@ -54,4 +55,9 @@ Level::Level(){
     std::shared_ptr<Texto> vidas = \
                 std::make_shared<Texto>(3*WINDOW_W/4 + l2*10, WINDOW_H-50, "3");
     this->textos.push_back(vidas);
+
+    // Cria a barra de velocidade
+    std::shared_ptr<SpeedBar> speedbar = \
+                std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
+    this->objects.push_back(speedbar);
 }

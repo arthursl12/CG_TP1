@@ -53,6 +53,7 @@ void reshape_callback(int w, int h){
 	glLoadIdentity();
 	glOrtho(0,WINDOW_W,0,WINDOW_H,-1,1);
 	glMatrixMode(GL_MODELVIEW);
+	glViewport(0, 0, w, h);
 }
 
 void keyboard_callback(int key, int, int){
