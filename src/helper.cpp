@@ -34,7 +34,10 @@ void display_callback(){
 		(*it)->draw();
     }
 
+
 	glutSwapBuffers();
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// if (gameOver){
 	// 	std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
 	// 	exit(0);
@@ -78,7 +81,8 @@ void keyboard_callback(int key, int, int){
 }
 
 void mouse_callback(int x, int y){
-	std::cout << "X: " << x << ", Y: " << y << std::endl;
+	// std::cout << "X: " << x << ", Y: " << y << std::endl;
+	lev.setMousePos(x, y);
 }
 
 void timer_callback(int){

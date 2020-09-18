@@ -6,7 +6,7 @@
 #include "texto.h"
 #include "speedbar.h"
 
-Level::Level(){
+void Level::createObjects(){
     // Cria o conjunto de tiles
     float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
     float TILE_HEIGHT = TILE_WIDTH/2;
@@ -35,7 +35,9 @@ Level::Level(){
     std::shared_ptr<Ball> ball = \
                 std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
     this->objects.push_back(ball);
+}
 
+void Level::createTextos(){
     // Cria placar
     std::string plStr = "Placar: ";
     int l1 = plStr.size();
@@ -55,9 +57,19 @@ Level::Level(){
     std::shared_ptr<Texto> vidas = \
                 std::make_shared<Texto>(3*WINDOW_W/4 + l2*10, WINDOW_H-50, "3");
     this->textos.push_back(vidas);
+}
 
+Level::Level(){
+    this->createObjects();
+    this->createTextos();
     // Cria a barra de velocidade
-    std::shared_ptr<SpeedBar> speedbar = \
+    this->speedbar = \
                 std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
-    this->objects.push_back(speedbar);
+    this->objects.push_back(this->speedbar);
+}
+
+void Level::setMousePos(int _x, int _y){
+    this->mouseX = _x;
+    this->mouseY = _y;
+    this->speedbar->setMousePos(_x, _y);
 }
