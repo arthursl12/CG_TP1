@@ -32,7 +32,6 @@ void Level::createObjects(){
 
     // Cria a bola
     this->ball = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
-    this->objects.push_back(ball);
 
     // Cria a barra de velocidade
     this->speedbar = std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
@@ -108,5 +107,36 @@ void Level::ballCollides(GameObject& obj){
     if (ball->collides(obj)){
         ball->handleCollision(obj);
         std::cout << "Colide3" << "Obj: " << std::endl;
+    }
+}
+
+void Level::draw(){
+    std::vector<std::shared_ptr<GameObject>>::iterator it;
+    for (it = textos.begin(); it != textos.end(); it++) { 
+		(*it)->draw();
+    }
+
+    std::vector<std::shared_ptr<Tile>>::iterator it1;
+	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
+		(*it1)->draw();
+		ballCollides(**it1);
+	}
+
+	for (it = objects.begin(); it != objects.end(); it++) { 
+		(*it)->draw();
+		ballCollides(**it);
+    }
+    ball->draw();
+}
+
+void Level::update(){
+    //Collision check
+    std::vector<std::shared_ptr<Tile>>::iterator it1;
+	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
+		ballCollides(**it1);
+	}
+	std::vector<std::shared_ptr<GameObject>>::iterator it;
+	for (it = objects.begin(); it != objects.end(); it++) { 
+		ballCollides(**it);
     }
 }

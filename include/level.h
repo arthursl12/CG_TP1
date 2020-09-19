@@ -18,6 +18,9 @@ class Level{
         std::vector<std::shared_ptr<GameObject>> textos;
 
         Level();
+        void draw();
+        void update();
+
         void setMousePos(int _x, int _y);
         bool getIsPaused();
         void changePauseState();
