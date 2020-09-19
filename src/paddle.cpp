@@ -12,9 +12,16 @@ Paddle::Paddle(float _x, float _y){
 }
 
 void Paddle::draw(){
-    // std::cout << this->x << ", " << this->y << std::endl;
+    // std::cout << this->x << ", " << this->y << std::endl;~
+    float newX = x + speed;
+    if (newX <= 0){
+        newX = 0;
+    }else if (newX + width >= WINDOW_W){
+        newX = WINDOW_W - width;
+    }
+    this->x = newX;
     glColor3f(0.9,0.9,0.9);
-    glRectf(x+speed, y, x+width, y+height);
+    glRectf(x, y, x+width, y+height);
 }
 
 void Paddle::setSpeed(float v){
