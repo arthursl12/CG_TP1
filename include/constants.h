@@ -19,13 +19,16 @@
 
 #define PADDLE_HEIGHT 20
 #define PADDLE_WIDTH 160
+#define PADDLE_Y 55
 #define PADDLE_MAX_SPEED 30
 #define MOUSE_CENTER_TOLERANCE 20
 #define MAX_WIDTH_SPEED_BAR 150
 
 #define BALL_SIZE 10
+#define BALL_MAX_X_SPEED 7
+#define BALL_MAX_Y_SPEED 7
 
-#define FPS 30
+#define FPS 60
 
 extern short sDirection;
 

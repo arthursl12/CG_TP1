@@ -27,17 +27,15 @@ void Level::createObjects(){
     }
 
     // Cria o paddle
-    this->paddle = std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 55);
+    this->paddle = std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, PADDLE_Y);
     this->objects.push_back(this->paddle);
 
     // Cria a bola
-    std::shared_ptr<Ball> ball = \
-                std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
+    this->ball = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
     this->objects.push_back(ball);
 
     // Cria a barra de velocidade
-    this->speedbar = \
-                std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
+    this->speedbar = std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
     this->objects.push_back(this->speedbar);
 }
 
@@ -65,7 +63,7 @@ void Level::createTextos(){
 
 Level::Level(){
     this->isPaused = true;
-
+    this->gameStarted = false;
     this->createObjects();
     this->createTextos();
 }
@@ -83,7 +81,6 @@ void Level::setMousePos(int _x, int _y){
         tol = -MOUSE_CENTER_TOLERANCE;
         speed = PADDLE_MAX_SPEED*(mouseX - meio - tol)/(meio - tol);
     }
-    std::cout << "Sp= " << abs(mouseX-meio) << ", tol= " << tol << ", mX= " << mouseX << std::endl;
 
     
     if (abs(mouseX - meio) <= MOUSE_CENTER_TOLERANCE){
@@ -100,5 +97,9 @@ bool Level::getIsPaused(){
 }
 
 void Level::changePauseState(){
+    if (!gameStarted){
+        ball->randomSpeed();
+        gameStarted = true;
+    }
     this->isPaused = !this->isPaused;
 }

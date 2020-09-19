@@ -6,6 +6,7 @@
 #include "tile.h"
 #include "constants.h"
 #include "paddle.h"
+#include "ball.h"
 #include "speedbar.h"
 
 
@@ -24,8 +25,10 @@ class Level{
         int mouseX;
         int mouseY;
         bool isPaused;
+        bool gameStarted;
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
+        std::shared_ptr<Ball> ball;
 
         void createObjects();
         void createTextos();
