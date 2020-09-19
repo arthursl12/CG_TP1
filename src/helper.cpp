@@ -63,10 +63,14 @@ void keyboard_callback(unsigned char key, int, int){
 		case 'q':
 			exit(0);
 			break;
-		case GLUT_KEY_RIGHT:
-			if(sDirection != LEFT)
-				sDirection = RIGHT;
+		case 'r':{
+			std::shared_ptr<Level> l1 = std::make_shared<Level>();
+			lev = *l1;
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glutPostRedisplay();
 			break;
+		}
 		case GLUT_KEY_LEFT:
 			if(sDirection != RIGHT)
 				sDirection = LEFT;
