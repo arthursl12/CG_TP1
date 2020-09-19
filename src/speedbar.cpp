@@ -35,6 +35,9 @@ void SpeedBar::setSpeed(float v){
     
     float meio = WINDOW_W/2;
     float newWidth = (v/PADDLE_MAX_SPEED) * MAX_WIDTH_SPEED_BAR;
+    if (v < 0){
+        newWidth = (v/PADDLE_MAX_SPEED) * (MAX_WIDTH_SPEED_BAR + MOUSE_CENTER_TOLERANCE);
+    }
     if (newWidth <= MAX_WIDTH_SPEED_BAR && newWidth >= -MAX_WIDTH_SPEED_BAR){
         this->speed = v;
         this->barWidth = newWidth;

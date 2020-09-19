@@ -72,8 +72,16 @@ void Level::setMousePos(int _x, int _y){
     this->mouseY = _y;
 
     float meio = WINDOW_W/2;
+    // Tolerância e velocidade para mouse à direita
     float tol = MOUSE_CENTER_TOLERANCE;
     float speed = PADDLE_MAX_SPEED*(mouseX - meio - tol)/(meio - tol);
+    if (mouseX < meio){
+        // Tolerância e velocidade para mouse à esquerda
+        tol = -MOUSE_CENTER_TOLERANCE;
+        speed = PADDLE_MAX_SPEED*(mouseX - meio - tol)/(meio - tol);
+    }
+    // std::cout << "Sp= " << speed << ", tol= " << tol << ", mX= " << mouseX << std::endl;
+
     
     if (mouseX <= meio+tol && mouseX >= meio-tol){
         this->speedbar->setSpeed(0);
