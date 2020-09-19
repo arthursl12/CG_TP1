@@ -8,8 +8,6 @@ class Tile: public GameObject{
         Tile(float _x, float _y, float _height, float _width);
         void draw();
     private:
-        float height;
-        float width;
 };
 
 #endif /* TILE_H */
