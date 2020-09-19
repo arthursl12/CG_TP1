@@ -18,9 +18,12 @@ class Level{
 
         Level();
         void setMousePos(int _x, int _y);
+        bool getIsPaused();
+        void changePauseState();
     private:
         int mouseX;
         int mouseY;
+        bool isPaused;
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
 

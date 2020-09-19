@@ -36,8 +36,7 @@ void display_callback(){
 
 
 	glutSwapBuffers();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	// if (gameOver){
 	// 	std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
 	// 	exit(0);
@@ -59,15 +58,10 @@ void reshape_callback(int w, int h){
 	glViewport(0, 0, w, h);
 }
 
-void keyboard_callback(int key, int, int){
+void keyboard_callback(unsigned char key, int, int){
 	switch(key){
-		case GLUT_KEY_UP:
-			if(sDirection != DOWN)
-				sDirection = UP;
-			break;
-		case GLUT_KEY_DOWN:
-			if(sDirection != UP)
-				sDirection = DOWN;
+		case 'q':
+			exit(0);
 			break;
 		case GLUT_KEY_RIGHT:
 			if(sDirection != LEFT)
@@ -80,12 +74,25 @@ void keyboard_callback(int key, int, int){
 	}
 }
 
-void mouse_callback(int x, int y){
+void motion_callback(int x, int y){
 	// std::cout << "X: " << x << ", Y: " << y << std::endl;
 	lev.setMousePos(x, y);
 }
 
+void mouse_callback(int button, int state, int x, int y){
+	if (button == GLUT_RIGHT_BUTTON){
+        if (state == GLUT_DOWN) {
+			lev.changePauseState();
+		}
+	}
+}
+
 void timer_callback(int){
-	glutPostRedisplay();
+	if (!lev.getIsPaused()){
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glutPostRedisplay();
+	}
+
 	glutTimerFunc(1000/FPS,timer_callback,0);
 }

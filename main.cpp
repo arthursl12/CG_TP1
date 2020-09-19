@@ -30,9 +30,10 @@ int main(int argc, char **argv){
 	glutDisplayFunc(display_callback);
 	glutReshapeFunc(reshape_callback);
 	glutTimerFunc(0,timer_callback,0);
-	glutSpecialFunc(keyboard_callback);
-	glutPassiveMotionFunc(mouse_callback);
-	glutMotionFunc(mouse_callback);
+	glutKeyboardFunc(keyboard_callback);
+	glutMouseFunc(mouse_callback);
+	glutPassiveMotionFunc(motion_callback);
+	glutMotionFunc(motion_callback);
 	init();
 	glutMainLoop();
 	return 0;

@@ -34,6 +34,11 @@ void Level::createObjects(){
     std::shared_ptr<Ball> ball = \
                 std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
     this->objects.push_back(ball);
+
+    // Cria a barra de velocidade
+    this->speedbar = \
+                std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
+    this->objects.push_back(this->speedbar);
 }
 
 void Level::createTextos(){
@@ -59,12 +64,10 @@ void Level::createTextos(){
 }
 
 Level::Level(){
+    this->isPaused = true;
+
     this->createObjects();
     this->createTextos();
-    // Cria a barra de velocidade
-    this->speedbar = \
-                std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
-    this->objects.push_back(this->speedbar);
 }
 
 void Level::setMousePos(int _x, int _y){
@@ -93,7 +96,12 @@ void Level::setMousePos(int _x, int _y){
         this->speedbar->setSpeed(speed);
         this->paddle->setSpeed(speed);
     }
+}
 
+bool Level::getIsPaused(){
+    return this->isPaused;
+}
 
-    
+void Level::changePauseState(){
+    this->isPaused = !this->isPaused;
 }

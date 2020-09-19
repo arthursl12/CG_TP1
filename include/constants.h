@@ -25,7 +25,7 @@
 
 #define BALL_SIZE 10
 
-#define FPS 10
+#define FPS 30
 
 extern short sDirection;
 
