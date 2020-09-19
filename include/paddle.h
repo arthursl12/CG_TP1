@@ -7,9 +7,11 @@ class Paddle: public GameObject{
     public:
         Paddle(float _x, float _y);
         void draw();
+        void setSpeed(float v);
     private:
         float height;
         float width;
+        float speed;
 };
 
 

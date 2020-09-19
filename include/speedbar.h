@@ -7,10 +7,12 @@ class SpeedBar: public GameObject{
     public:
         SpeedBar(float _x, float _y);
         void draw();
-        void setMousePos(int _x, int _y);
+        void setSpeed(float v);
     private:
-        float height;
-        float width;
+        float markHeight;
+        float markWidth;
+        float barHeight;
+        float barWidth;
         float speed;
         int mouseX;
         int mouseY;

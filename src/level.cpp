@@ -27,9 +27,8 @@ void Level::createObjects(){
     }
 
     // Cria o paddle
-    std::shared_ptr<Paddle> pad = \
-                std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 55);
-    this->objects.push_back(pad);
+    this->paddle = std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, 55);
+    this->objects.push_back(this->paddle);
 
     // Cria a bola
     std::shared_ptr<Ball> ball = \
@@ -71,5 +70,22 @@ Level::Level(){
 void Level::setMousePos(int _x, int _y){
     this->mouseX = _x;
     this->mouseY = _y;
-    this->speedbar->setMousePos(_x, _y);
+
+    float meio = WINDOW_W/2;
+    float tol = MOUSE_CENTER_TOLERANCE;
+    float speed = PADDLE_MAX_SPEED*(mouseX - meio - tol)/(meio - tol);
+    
+    if (mouseX <= meio+tol && mouseX >= meio-tol){
+        this->speedbar->setSpeed(0);
+        this->paddle->setSpeed(0);
+    }else if (mouseX > meio+tol){
+        this->speedbar->setSpeed(speed);
+        this->paddle->setSpeed(speed);
+    }else if (mouseX < meio+tol){
+        this->speedbar->setSpeed(speed);
+        this->paddle->setSpeed(speed);
+    }
+
+
+    
 }
