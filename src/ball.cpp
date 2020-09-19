@@ -9,6 +9,7 @@ Ball::Ball(float _x, float _y){
     this->y = _y;
     this->height = size;
     this->width = size;
+    this->nome = "ball";
 
     this->size = BALL_SIZE;
     this->speedX = 0;
@@ -63,4 +64,10 @@ void Ball::randomSpeed(){
         //Velocidade em Y aleatória
         speedY = rand()%(BALL_MAX_Y_SPEED/2)+4;
     }
+}
+
+void Ball::handleCollision(GameObject& obj){
+    // Já sabemos que houve colisão
+    // Temos que descobrir em que lado a bola colidiu
+
 }

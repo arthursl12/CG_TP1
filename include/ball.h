@@ -8,7 +8,7 @@ class Ball: public GameObject{
         Ball(float _x, float _y);
         void draw();
         void randomSpeed();
-        // void handleCollision
+        void handleCollision(GameObject& obj);
     private:
         float size;
         float speedX;

@@ -8,6 +8,7 @@ Paddle::Paddle(float _x, float _y){
     this->y = _y;
     this->height = PADDLE_HEIGHT;
     this->width = PADDLE_WIDTH;
+    this->nome = "paddle";
     this->speed = 0;
 }
 

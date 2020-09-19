@@ -7,6 +7,7 @@ Tile::Tile(float _x, float _y, float _height, float _width){
     this->y = _y;
     this->height = _height;
     this->width = _width;
+    this->nome = "tile";
 }
 
 void Tile::draw(){
