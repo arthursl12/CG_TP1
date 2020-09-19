@@ -7,6 +7,9 @@
 Ball::Ball(float _x, float _y){
     this->x = _x;
     this->y = _y;
+    this->height = size;
+    this->width = size;
+
     this->size = BALL_SIZE;
     this->speedX = 0;
     this->speedY = 0;
@@ -14,7 +17,6 @@ Ball::Ball(float _x, float _y){
 }
 
 void Ball::draw(){
-    // std::cout << this->x << ", " << this->y << std::endl;
     float newX = x + speedX;
     float newY = y + speedY;
 
@@ -33,13 +35,22 @@ void Ball::draw(){
         speedY = -speedY;
     }else if (newY < PADDLE_Y){
         // Lose a life or game over: trigger event
-        std::cout << "Perde vida" << std::endl;
+        // std::cout << "Perde vida" << std::endl;
     }
-    std::cout << "SX: " << speedX << ", SY: " << speedY << std::endl;
+
     x = newX;
     y = newY;
     glColor3f(1,0,1);
     glRectf(x, y, x+size, y+size);
+
+    if (DBG){
+        glColor3f(1,0,0);
+        glRectf(x, y-5, x+2, y+10);
+
+        glColor3f(1,0,0);
+        glRectf(x-5, y, x+10, y+2);
+    }
+
 }
 
 void Ball::randomSpeed(){

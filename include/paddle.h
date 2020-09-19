@@ -9,8 +9,6 @@ class Paddle: public GameObject{
         void draw();
         void setSpeed(float v);
     private:
-        float height;
-        float width;
         float speed;
 };
 

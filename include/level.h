@@ -21,6 +21,7 @@ class Level{
         void setMousePos(int _x, int _y);
         bool getIsPaused();
         void changePauseState();
+        void ballCollides(GameObject& obj);
     private:
         int mouseX;
         int mouseY;

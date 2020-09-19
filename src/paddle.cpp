@@ -22,6 +22,15 @@ void Paddle::draw(){
     this->x = newX;
     glColor3f(0.9,0.9,0.9);
     glRectf(x, y, x+width, y+height);
+
+    if (DBG){
+        glColor3f(1,0,0);
+        glRectf(x, y-5, x+2, y+10);
+
+        glColor3f(1,0,0);
+        glRectf(x-5, y, x+10, y+2);
+    }
+
 }
 
 void Paddle::setSpeed(float v){

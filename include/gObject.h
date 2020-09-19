@@ -4,8 +4,10 @@
 class GameObject {
     public:
         virtual void draw() = 0;
+        virtual bool collides(GameObject& obj);
     protected:
         float x, y;
+        float height, width;
 };
 
 #endif /* GAME_OBJECT_H */
