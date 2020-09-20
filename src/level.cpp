@@ -86,8 +86,10 @@ void Level::changePauseState(){
     if (!gameStarted){
         ball->randomSpeed();
         gameStarted = true;
+        this->isPaused = false;
+    }else{
+        this->isPaused = !this->isPaused;
     }
-    this->isPaused = !this->isPaused;
 }
 
 bool Level::ballCollides(GameObject& obj){
@@ -152,17 +154,17 @@ void Level::update(){
     }
 
     // Detectar se bola não saiu dos limites
-    if (ball->isOutOfBounds() and !this->isPaused){
+    if (ball->isOutOfBounds()){
         if (vidas->isLastVida()){
-            
             vidas->addVida(-1);
-            this->isPaused = true;
-            std::cout << "Aqui1" << std::endl;
+            this->gameStarted = false;
+            this->ball = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
+
         }else{
-            
             vidas->addVida(-1);
-            this->isPaused = true;
-            std::cout << "Aqui2" << std::endl;
+            this->gameStarted = false;
+            this->ball = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
+
         }
     }
 }
