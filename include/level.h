@@ -8,7 +8,7 @@
 #include "paddle.h"
 #include "ball.h"
 #include "speedbar.h"
-
+#include "placar.h"
 
 
 class Level{
@@ -30,9 +30,11 @@ class Level{
         int mouseY;
         bool isPaused;
         bool gameStarted;
+        int score;
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
         std::shared_ptr<Ball> ball;
+        std::shared_ptr<Placar> placar;
 
         void createObjects();
         void createTextos();

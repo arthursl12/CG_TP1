@@ -40,14 +40,7 @@ void Level::createObjects(){
 
 void Level::createTextos(){
     // Cria placar
-    std::string plStr = "Placar: ";
-    int l1 = plStr.size();
-    std::shared_ptr<Texto> placarLabel = \
-                std::make_shared<Texto>(WINDOW_W/6, WINDOW_H-50, plStr);
-    this->textos.push_back(placarLabel);
-    std::shared_ptr<Texto> placar = \
-                std::make_shared<Texto>(WINDOW_W/6 + l1*10, WINDOW_H-50, "100");
-    this->textos.push_back(placar);
+    this->placar = std::make_shared<Placar>();
 
     // Cria conta-vidas
     std::string vdStr = "Vidas: ";
@@ -61,6 +54,7 @@ void Level::createTextos(){
 }
 
 Level::Level(){
+    this->score = 0;
     this->isPaused = true;
     this->gameStarted = false;
     this->createObjects();
@@ -144,6 +138,7 @@ void Level::draw(){
 		(*it)->draw();
     }
     ball->draw();
+    placar->draw();
 }
 
 void Level::update(){
@@ -151,6 +146,8 @@ void Level::update(){
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
 		if (ballCollides(**it1)){
+            score += TILE_SCORE;
+            placar->addScore(TILE_SCORE);
             break;
         }
 	}
