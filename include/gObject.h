@@ -4,9 +4,11 @@
 #include <string>
 
 class GameObject {
+    friend class Ball; 
     public:
         virtual void draw() = 0;
         virtual bool collides(GameObject& obj);
+        std::string getNome();
     protected:
         float x, y;
         float height, width;

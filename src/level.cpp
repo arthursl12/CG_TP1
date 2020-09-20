@@ -105,8 +105,9 @@ void Level::changePauseState(){
 
 void Level::ballCollides(GameObject& obj){
     if (ball->collides(obj)){
+        
         ball->handleCollision(obj);
-        std::cout << "Colide3" << "Obj: " << std::endl;
+        // std::cout << "Colide3" << "Obj: " << std::endl;
     }
 }
 

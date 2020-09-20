@@ -26,3 +26,7 @@ bool GameObject::collides(GameObject& obj){
     // Se as condições acima não valem, então eles estão colidindo
     return true;
 }
+
+std::string GameObject::getNome(){
+    return this->nome;
+}

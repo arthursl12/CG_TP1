@@ -4,6 +4,7 @@
 #include "gObject.h"
 
 class Paddle: public GameObject{
+    friend class Ball; 
     public:
         Paddle(float _x, float _y);
         void draw();

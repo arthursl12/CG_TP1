@@ -2,6 +2,9 @@
 #define BALL_H
 
 #include "gObject.h"
+#include "paddle.h"
+#include "tile.h"
+#include <bits/stdc++.h> 
 
 class Ball: public GameObject{
     public:

@@ -67,7 +67,33 @@ void Ball::randomSpeed(){
 }
 
 void Ball::handleCollision(GameObject& obj){
-    // Já sabemos que houve colisão
-    // Temos que descobrir em que lado a bola colidiu
+    if (obj.nome == "paddle"){
+        std::cout << "PADDLE" << std::endl;
+        Paddle& paddle = dynamic_cast<Paddle&>(obj);  
+
+        speedY = -speedY;
+        y = paddle.y + paddle.height + 1;     //Offset para evitar colisão infinita
+        // Se colidirmos no lado esquerdo enquanto indo para esquerda
+        if (x < paddle.x + (paddle.width / 2) && paddle.speed < 0){
+            float ratio = (paddle.x + paddle.width / 2 - x)/BALL_MAX_X_SPEED;
+            float newspeedX = -(BALL_MAX_X_SPEED/2) + -(ratio);
+            if (newspeedX > BALL_MAX_X_SPEED){
+                speedX = BALL_MAX_X_SPEED;
+            }else{
+                speedX = newspeedX;
+            }
+        }
+
+        // Se colidirmos no lado direito enquanto indo para a direita
+        else if (x > paddle.x + (paddle.width / 2) && paddle.speed > 0){
+            float ratio = abs((paddle.x + paddle.width / 2 - x)/BALL_MAX_X_SPEED);
+            float newspeedX = (BALL_MAX_X_SPEED/2) + (ratio);
+            if (newspeedX > BALL_MAX_X_SPEED){
+                speedX = BALL_MAX_X_SPEED;
+            }else{
+                speedX = newspeedX;
+            }
+        }
+    }
 
 }
