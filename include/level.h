@@ -9,6 +9,7 @@
 #include "ball.h"
 #include "speedbar.h"
 #include "placar.h"
+#include "vidas.h"
 
 
 class Level{
@@ -35,6 +36,7 @@ class Level{
         std::shared_ptr<Paddle> paddle;
         std::shared_ptr<Ball> ball;
         std::shared_ptr<Placar> placar;
+        std::shared_ptr<Vidas> vidas;
 
         void createObjects();
         void createTextos();

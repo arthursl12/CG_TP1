@@ -15,6 +15,11 @@ Ball::Ball(float _x, float _y){
     this->speedX = 0;
     this->speedY = 0;
     this->firstMove = true;
+    this->outOfBounds = false;
+}
+
+bool Ball::isOutOfBounds(){
+    return this->outOfBounds;
 }
 
 void Ball::draw(){
@@ -36,7 +41,7 @@ void Ball::draw(){
         speedY = -speedY;
     }else if (newY < PADDLE_Y){
         // Lose a life or game over: trigger event
-        // std::cout << "Perde vida" << std::endl;
+        outOfBounds = true;
     }
 
     x = newX;

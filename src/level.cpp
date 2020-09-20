@@ -43,14 +43,7 @@ void Level::createTextos(){
     this->placar = std::make_shared<Placar>();
 
     // Cria conta-vidas
-    std::string vdStr = "Vidas: ";
-    int l2 = vdStr.size();
-    std::shared_ptr<Texto> vidasLabel = \
-                std::make_shared<Texto>(3*WINDOW_W/4, WINDOW_H-50, vdStr);
-    this->textos.push_back(vidasLabel);
-    std::shared_ptr<Texto> vidas = \
-                std::make_shared<Texto>(3*WINDOW_W/4 + l2*10, WINDOW_H-50, "3");
-    this->textos.push_back(vidas);
+    this->vidas = std::make_shared<Vidas>();
 }
 
 Level::Level(){
@@ -137,8 +130,10 @@ void Level::draw(){
 	for (it = objects.begin(); it != objects.end(); it++) { 
 		(*it)->draw();
     }
-    ball->draw();
     placar->draw();
+    vidas->draw();
+    ball->draw();
+
 }
 
 void Level::update(){
@@ -154,5 +149,20 @@ void Level::update(){
 	std::vector<std::shared_ptr<GameObject>>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++) { 
 		ballCollides(**it);
+    }
+
+    // Detectar se bola não saiu dos limites
+    if (ball->isOutOfBounds() and !this->isPaused){
+        if (vidas->isLastVida()){
+            
+            vidas->addVida(-1);
+            this->isPaused = true;
+            std::cout << "Aqui1" << std::endl;
+        }else{
+            
+            vidas->addVida(-1);
+            this->isPaused = true;
+            std::cout << "Aqui2" << std::endl;
+        }
     }
 }

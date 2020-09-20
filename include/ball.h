@@ -12,11 +12,13 @@ class Ball: public GameObject{
         void draw();
         void randomSpeed();
         void handleCollision(GameObject& obj);
+        bool isOutOfBounds();
     private:
         float size;
         float speedX;
         float speedY;
         bool firstMove;
+        bool outOfBounds;
 };
 
 
