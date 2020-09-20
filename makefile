@@ -11,7 +11,7 @@ LIBS := -lglut -lGL -lGLU
 INC := -I include
 
 
-MODULES = game helper gObject tile level paddle ball texto speedbar placar vidas
+MODULES = game helper gObject tile level paddle ball texto textolabel speedbar placar vidas
 SOURCES = $(addsuffix .cpp,$(MODULES))
 OBJECTS = $(patsubst %.cpp, %.o, $(SOURCES))
 TESTS = $(addprefix test_,$(SOURCES))

@@ -8,6 +8,7 @@ class Texto: public GameObject{
     public:
         Texto(float _x, float _y, std::string _str);
         void draw();
+        void updateString(std::string _str);
     private:
         std::string str;
 };

@@ -132,9 +132,14 @@ void Level::draw(){
 	for (it = objects.begin(); it != objects.end(); it++) { 
 		(*it)->draw();
     }
+
+
+
     placar->draw();
     vidas->draw();
     ball->draw();
+
+    
 
 }
 

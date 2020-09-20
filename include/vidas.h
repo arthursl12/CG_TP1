@@ -2,7 +2,7 @@
 #define VIDAS_H
 
 #include "gObject.h"
-#include "texto.h"
+#include "textolabel.h"
 #include <memory>
 
 class Vidas : public GameObject{
@@ -14,9 +14,7 @@ class Vidas : public GameObject{
     private:
         int vidas;
         bool lastLife;
-        std::string labelStr;
-        std::shared_ptr<Texto> label;
-        std::shared_ptr<Texto> textScore;
+        std::shared_ptr<TextoLabel> display;
 };
 
 #endif

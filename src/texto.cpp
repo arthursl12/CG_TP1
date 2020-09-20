@@ -15,3 +15,7 @@ void Texto::draw(){
     glRasterPos2f(x, y);
     glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)str.c_str());
 }
+
+void Texto::updateString(std::string _str){
+    this->str = _str;
+}

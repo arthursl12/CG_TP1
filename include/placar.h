@@ -2,7 +2,7 @@
 #define PLACAR_H
 
 #include "gObject.h"
-#include "texto.h"
+#include "textolabel.h"
 
 class Placar : public GameObject{
     public:
@@ -11,9 +11,7 @@ class Placar : public GameObject{
         void draw();
     private:
         int score;
-        std::string labelStr;
-        std::shared_ptr<Texto> label;
-        std::shared_ptr<Texto> textScore;
+        std::shared_ptr<TextoLabel> display;
 };
 
 #endif
