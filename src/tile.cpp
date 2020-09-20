@@ -24,3 +24,11 @@ void Tile::draw(){
         glRectf(x-5, y, x+10, y+2);
     }
 }
+
+bool Tile::operator== (Tile &outro){
+    if (this->x != outro.x)
+        return false;
+    if (this->y != outro.y)
+        return false;
+    return true; 
+}

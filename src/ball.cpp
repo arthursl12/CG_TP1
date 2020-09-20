@@ -68,7 +68,6 @@ void Ball::randomSpeed(){
 
 void Ball::handleCollision(GameObject& obj){
     if (obj.nome == "paddle"){
-        std::cout << "PADDLE" << std::endl;
         Paddle& paddle = dynamic_cast<Paddle&>(obj);  
 
         speedY = -speedY;
@@ -94,6 +93,44 @@ void Ball::handleCollision(GameObject& obj){
                 speedX = newspeedX;
             }
         }
+    }else if (obj.nome == "tile"){
+        Tile& tile = dynamic_cast<Tile&>(obj);
+
+        
+        // Lado Esquerdo; verifica se estamos indo para direita
+        if (x + 2 < tile.x and speedX > 0){
+            std::cout << "esquerda" << std::endl;
+            // Inverte velocidadeX e reposiciona bola fora do tile
+            speedX = -speedX;
+            x = tile.x - BALL_SIZE - 1;
+        }
+        // Lado Direito; verifica se estamos indo para esquerda
+        else if(x + BALL_SIZE-2 > tile.x + tile.width and speedX < 0){
+            std::cout << "direita" << std::endl;
+            float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
+            speedX = -speedX;
+            x = tile.x + TILE_WIDTH + 1;
+        }
+        // Abaixo
+        else if(y <= tile.y+tile.height){
+            std::cout << "baixo" << std::endl;
+            speedY = -speedY;
+            float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
+            float TILE_HEIGHT = TILE_WIDTH/2;
+            y = tile.y - height - 1;
+        }
+        // Acima, última possibilidade
+        else{
+            std::cout << "cima" << std::endl;
+            speedY = -speedY;
+            y = tile.y + tile.height + 1;
+        }
+
+        if (abs(speedY) < BALL_MAX_Y_SPEED){
+            speedY = speedY * 1.01;
+        }
     }
+
+        
 
 }

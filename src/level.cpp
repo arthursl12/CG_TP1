@@ -103,12 +103,30 @@ void Level::changePauseState(){
     this->isPaused = !this->isPaused;
 }
 
-void Level::ballCollides(GameObject& obj){
+bool Level::ballCollides(GameObject& obj){
     if (ball->collides(obj)){
-        
         ball->handleCollision(obj);
+        if (obj.getNome() == "tile"){
+            this->removeTile(obj);
+            return true;
+        }
         // std::cout << "Colide3" << "Obj: " << std::endl;
     }
+    return false;
+}
+
+void Level::removeTile(GameObject& _tile){
+    Tile& tile = dynamic_cast<Tile&>(_tile);
+    std::vector<std::shared_ptr<Tile>>::iterator it1;
+    int i = 0;
+	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
+		if (**it1 == tile){
+            it1 = tileMap.erase(tileMap.begin() + i);
+            break;
+        }
+        i++;
+	}
+
 }
 
 void Level::draw(){
@@ -120,12 +138,10 @@ void Level::draw(){
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
 		(*it1)->draw();
-		ballCollides(**it1);
 	}
 
 	for (it = objects.begin(); it != objects.end(); it++) { 
 		(*it)->draw();
-		ballCollides(**it);
     }
     ball->draw();
 }
@@ -134,7 +150,9 @@ void Level::update(){
     //Collision check
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
-		ballCollides(**it1);
+		if (ballCollides(**it1)){
+            break;
+        }
 	}
 	std::vector<std::shared_ptr<GameObject>>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++) { 

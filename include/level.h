@@ -24,7 +24,7 @@ class Level{
         void setMousePos(int _x, int _y);
         bool getIsPaused();
         void changePauseState();
-        void ballCollides(GameObject& obj);
+        bool ballCollides(GameObject& obj);
     private:
         int mouseX;
         int mouseY;
@@ -36,6 +36,7 @@ class Level{
 
         void createObjects();
         void createTextos();
+        void removeTile(GameObject& tile);
     
 };
 

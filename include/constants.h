@@ -9,8 +9,10 @@
 #define WINDOW_H 800
 #define WINDOW_W 700
 
+// #define T_COL 10
+// #define T_ROW 5
 #define T_COL 10
-#define T_ROW 5
+#define T_ROW 1
 // #define TILE_WIDTH 75
 // #define TILE_HEIGHT 40
 #define TILE_H_SPACE 8
