@@ -112,7 +112,6 @@ void Ball::handleCollision(GameObject& obj){
         // Lado Direito; verifica se estamos indo para esquerda
         else if(x + 2 > tile.x + tile.width and speedX < 0){
             std::cout << "direita" << std::endl;
-            float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
             speedX = -speedX;
             x = tile.x + TILE_WIDTH + 1;
         }
@@ -120,8 +119,6 @@ void Ball::handleCollision(GameObject& obj){
         else if(y <= tile.y+tile.height){
             std::cout << "baixo" << std::endl;
             speedY = -speedY;
-            float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
-            float TILE_HEIGHT = TILE_WIDTH/2;
             y = tile.y - height - 1;
         }
         // Acima, última possibilidade

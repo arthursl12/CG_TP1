@@ -8,22 +8,26 @@
 
 void Level::createObjects(){
     // Cria o conjunto de tiles a partir do canto superior esquerdo e descendo
-    float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
-    float TILE_HEIGHT = TILE_WIDTH/2;
-    float MAP_X = TILE_H_SPACE - 4;
+    float height = TILE_WIDTH/TILE_H_W_RATIO;
+    int numCols = rand()%(MAX_COL-MIN_COL) + MIN_COL;     // Entre 7 e 13 colunas
+    int numRows = rand()%(MAX_ROW-MIN_ROW) + MIN_ROW;     // Entre 1 e 5 linhas
+    numCols = (numCols % 2 == 0) ? (numCols + 1) : numCols;
 
-    float curX = MAP_X;
-    float curY = WINDOW_H - MAP_OFFSET;
-    for (int i = 0; i < T_ROW; i++){
-        for (int j = 0; j < T_COL; j++){
+    float initX = 0.5 * (WINDOW_W - (numCols * TILE_WIDTH) - ((numCols-1) * TILE_H_SPACE));
+    float initY = WINDOW_H - MAP_OFFSET;
+
+    float curX = initX;
+    float curY = initY;
+    for (int i = 0; i < numRows; i++){
+        for (int j = 0; j < numCols; j++){
             std::shared_ptr<Tile> t = \
-                std::make_shared<Tile>(curX, curY,TILE_HEIGHT,TILE_WIDTH,Azul);
+                std::make_shared<Tile>(curX, curY,height,TILE_WIDTH,Azul);
             this->tileMap.push_back(t);
             curX += TILE_H_SPACE;
             curX += TILE_WIDTH;
         }
-        curY -= TILE_HEIGHT+TILE_V_SPACE;
-        curX = MAP_X;
+        curY -= height+TILE_V_SPACE;
+        curX = initX;
     }
 
     // Cria o paddle

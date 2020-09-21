@@ -7,18 +7,17 @@
 #define ROWS 40
 
 #define WINDOW_H 800
-#define WINDOW_W 700
+#define WINDOW_W 900
 
 #define T_COL 10
-// #define T_ROW 4
-// #define T_COL 10
-// #define T_ROW 1
-// #define TILE_WIDTH 75
-// #define TILE_HEIGHT 40
-#define TILE_H_SPACE 8
-#define TILE_V_SPACE 8
-// #define MAP_X 8
-// #define MAP_Y 450
+#define MAX_COL 12
+#define MIN_COL 7
+#define MAX_ROW 7
+#define MIN_ROW 1
+#define TILE_H_W_RATIO 2.5
+#define TILE_WIDTH 64
+#define TILE_H_SPACE 6
+#define TILE_V_SPACE 6
 #define MAP_OFFSET 90
 
 #define PADDLE_HEIGHT 20
