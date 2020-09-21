@@ -36,6 +36,7 @@
 
 #define FPS 60
 
+enum Cores {Vermelho, Laranja, Amarelo, Verde, Azul, Violeta, Special};
 extern short sDirection;
 
 #endif /* CONSTANTS_H */

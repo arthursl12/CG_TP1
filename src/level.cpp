@@ -17,7 +17,7 @@ void Level::createObjects(){
     for (int i = 0; i < T_ROW; i++){
         for (int j = 0; j < T_COL; j++){
             std::shared_ptr<Tile> t = \
-                std::make_shared<Tile>(curX, curY,TILE_HEIGHT,TILE_WIDTH);
+                std::make_shared<Tile>(curX, curY,TILE_HEIGHT,TILE_WIDTH,Azul);
             this->tileMap.push_back(t);
             curX += TILE_H_SPACE;
             curX += TILE_WIDTH;
