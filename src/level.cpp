@@ -7,30 +7,31 @@
 #include "speedbar.h"
 
 void Level::createTiles(){
+    std::srand(time(NULL));
     // Cria o conjunto de tiles a partir do canto superior esquerdo e descendo
     float height = TILE_WIDTH/TILE_H_W_RATIO;
-    int numCols = rand()%(MAX_COL-MIN_COL) + MIN_COL;     // Entre 7 e 13 colunas
-    int numRows = rand()%(MAX_ROW-MIN_ROW) + MIN_ROW;     // Entre 1 e 5 linhas
+    int numCols = std::rand()%(MAX_COL-MIN_COL) + MIN_COL;     // Entre 7 e 13 colunas
+    int numRows = std::rand()%(MAX_ROW-MIN_ROW) + MIN_ROW;     // Entre 1 e 5 linhas
     numCols = (numCols % 2 == 0) ? (numCols + 1) : numCols;
 
     float initX = 0.5 * (WINDOW_W - (numCols * TILE_WIDTH) - ((numCols-1) * TILE_H_SPACE));
     float initY = WINDOW_H - MAP_OFFSET;
 
-    int maxCor = rand()%5 + 2;
+    int maxCor = std::rand()%5 + 2;
 
     float curX = initX;
     float curY = initY;
     for (int i = 0; i < numRows; i++){
-        bool padraoLacuna = (rand()%2 + 1 == 1) ? true : false;
-        bool padraoAltern = (rand()%2 + 1 == 1) ? true : false;
+        bool padraoLacuna = (std::rand()%2 + 1 == 1) ? true : false;
+        bool padraoAltern = (std::rand()%2 + 1 == 1) ? true : false;
         
         // Duas cores para alternar
-        int corAltern1 = rand()%(maxCor + 1);
-        int corAltern2 = rand()%(maxCor + 1);
-        int corSimples = rand()%(maxCor + 1);     //Se não vamos alternar
+        int corAltern1 = std::rand()%(maxCor + 1);
+        int corAltern2 = std::rand()%(maxCor + 1);
+        int corSimples = std::rand()%(maxCor + 1);     //Se não vamos alternar
         
-        bool flagLacuna = (rand()%2 + 1 == 1) ? true : false;
-        bool flagAltern = (rand()%2 + 1 == 1) ? true : false;
+        bool flagLacuna = (std::rand()%2 + 1 == 1) ? true : false;
+        bool flagAltern = (std::rand()%2 + 1 == 1) ? true : false;
 
         for (int j = 0; j < numCols; j++){
             if (padraoLacuna && flagLacuna){

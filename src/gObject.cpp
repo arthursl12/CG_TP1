@@ -24,6 +24,7 @@ bool GameObject::collides(GameObject& obj){
     }
 
     // Se as condições acima não valem, então eles estão colidindo
+    std::cout << "Col: " << this->nome << " e " << obj.nome << std::endl;
     return true;
 }
 

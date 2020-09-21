@@ -7,8 +7,8 @@
 Ball::Ball(float _x, float _y){
     this->x = _x;
     this->y = _y;
-    this->height = size;
-    this->width = size;
+    this->height = BALL_SIZE;
+    this->width = BALL_SIZE;
     this->nome = "ball";
 
     this->size = BALL_SIZE;
@@ -100,17 +100,19 @@ void Ball::handleCollision(GameObject& obj){
         }
     }else if (obj.nome == "tile"){
         Tile& tile = dynamic_cast<Tile&>(obj);
-
-        
         // Lado Esquerdo; verifica se estamos indo para direita
-        if (x - 2 < tile.x and speedX > 0){
+        std::cout << "x,y: " << x << ", " << y << std::endl;
+        std::cout << "xy+: " << x+width << ", " << y+height << std::endl;
+        std::cout << "til: " << tile.x << ", " << tile.y << std::endl;
+        std::cout << "ti+: " << tile.x+tile.width << ", " << tile.y+tile.height << std::endl;
+        if (x - 5 <= tile.x and speedX > 0){
             std::cout << "esquerda" << std::endl;
             // Inverte velocidadeX e reposiciona bola fora do tile
             speedX = -speedX;
             x = tile.x - BALL_SIZE - 1;
         }
         // Lado Direito; verifica se estamos indo para esquerda
-        else if(x + 2 > tile.x + tile.width and speedX < 0){
+        else if(x + 5 >= tile.x + tile.width and speedX < 0){
             std::cout << "direita" << std::endl;
             speedX = -speedX;
             x = tile.x + TILE_WIDTH + 1;

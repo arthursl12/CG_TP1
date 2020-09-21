@@ -2,6 +2,8 @@
 #include "GL/glut.h"
 #include <iostream>
 #include <memory>
+#include <ctime>
+#include <cstdlib>
 
 
 #include "constants.h"
