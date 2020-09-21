@@ -41,9 +41,34 @@ void Level::createObjects(){
 void Level::createTextos(){
     // Cria placar
     this->placar = std::make_shared<Placar>();
-
     // Cria conta-vidas
     this->vidas = std::make_shared<Vidas>();
+
+    // Cria display de informações
+    std::shared_ptr<TextoLabel> p1 = std::make_shared<TextoLabel> \
+            (WINDOW_W/2 + 30, WINDOW_W/4+60, "Bola.x", std::to_string(ball->x));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Bola.x",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 + 30, WINDOW_W/4+40, "Bola.y", std::to_string(ball->y));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Bola.y",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 + 30, WINDOW_W/4+20, "Bola.dx", std::to_string(ball->speedX));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Bola.dx",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 + 30, WINDOW_W/4+0, "Bola.dy", std::to_string(ball->speedY));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Bola.dy",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 - 250, WINDOW_W/4+60, "Paddle.x", std::to_string(paddle->x));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Paddle.x",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 - 250, WINDOW_W/4+40, "Paddle.y", std::to_string(paddle->y));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Paddle.y",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 - 250, WINDOW_W/4+20, "Paddle.dx", std::to_string(paddle->speed));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Paddle.dx",p1));
+    p1 = std::make_shared<TextoLabel> \
+        (WINDOW_W/2 - 250, WINDOW_W/4+0, "Qtd. tiles", std::to_string(tileMap.size()));
+    this->textos.insert(std::pair<std::string, std::shared_ptr<TextoLabel>>("Qtd. tiles",p1));
 }
 
 Level::Level(){
@@ -119,9 +144,9 @@ void Level::removeTile(GameObject& _tile){
 }
 
 void Level::draw(){
-    std::vector<std::shared_ptr<GameObject>>::iterator it;
+    std::map<std::string, std::shared_ptr<TextoLabel>>::iterator it;
     for (it = textos.begin(); it != textos.end(); it++) { 
-		(*it)->draw();
+		it->second->draw();
     }
 
     std::vector<std::shared_ptr<Tile>>::iterator it1;
@@ -129,18 +154,14 @@ void Level::draw(){
 		(*it1)->draw();
 	}
 
-	for (it = objects.begin(); it != objects.end(); it++) { 
-		(*it)->draw();
+    std::vector<std::shared_ptr<GameObject>>::iterator it2;
+	for (it2 = objects.begin(); it2 != objects.end(); it2++) { 
+		(*it2)->draw();
     }
-
-
 
     placar->draw();
     vidas->draw();
     ball->draw();
-
-    
-
 }
 
 void Level::update(){
@@ -172,4 +193,13 @@ void Level::update(){
 
         }
     }
+
+    this->textos["Bola.x"]->updateText(std::to_string(ball->x));
+    this->textos["Bola.y"]->updateText(std::to_string(ball->y));
+    this->textos["Bola.dx"]->updateText(std::to_string(ball->speedX));
+    this->textos["Bola.dy"]->updateText(std::to_string(ball->speedY));
+    this->textos["Paddle.x"]->updateText(std::to_string(paddle->x));
+    this->textos["Paddle.y"]->updateText(std::to_string(paddle->y));
+    this->textos["Paddle.dx"]->updateText(std::to_string(paddle->speed));
+    this->textos["Qtd. tiles"]->updateText(std::to_string(tileMap.size()));
 }

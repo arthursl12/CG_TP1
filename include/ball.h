@@ -7,13 +7,14 @@
 #include <bits/stdc++.h> 
 
 class Ball: public GameObject{
+    friend class Level;
     public:
         Ball(float _x, float _y);
         void draw();
         void randomSpeed();
         void handleCollision(GameObject& obj);
         bool isOutOfBounds();
-    private:
+    protected:
         float size;
         float speedX;
         float speedY;

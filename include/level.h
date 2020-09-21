@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <map>
 #include "tile.h"
 #include "constants.h"
 #include "paddle.h"
@@ -16,7 +17,7 @@ class Level{
     public:
         std::vector<std::shared_ptr<Tile>> tileMap;
         std::vector<std::shared_ptr<GameObject>> objects;
-        std::vector<std::shared_ptr<GameObject>> textos;
+        std::map<std::string, std::shared_ptr<TextoLabel>> textos;
 
         Level();
         void draw();
