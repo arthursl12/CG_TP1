@@ -33,7 +33,7 @@ class Level{
         bool displayInfoPause;
         int score;
 
-        int T_ROW;
+
 
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
@@ -46,8 +46,8 @@ class Level{
 
         void createObjects();
         void createTextos();
+        void createTiles();
         void removeTile(GameObject& tile);
-    
 };
 
 #endif /* LEVEL_H */

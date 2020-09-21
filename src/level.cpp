@@ -6,7 +6,7 @@
 #include "texto.h"
 #include "speedbar.h"
 
-void Level::createObjects(){
+void Level::createTiles(){
     // Cria o conjunto de tiles a partir do canto superior esquerdo e descendo
     float height = TILE_WIDTH/TILE_H_W_RATIO;
     int numCols = rand()%(MAX_COL-MIN_COL) + MIN_COL;     // Entre 7 e 13 colunas
@@ -16,12 +16,49 @@ void Level::createObjects(){
     float initX = 0.5 * (WINDOW_W - (numCols * TILE_WIDTH) - ((numCols-1) * TILE_H_SPACE));
     float initY = WINDOW_H - MAP_OFFSET;
 
+    int maxCor = rand()%5 + 2;
+
     float curX = initX;
     float curY = initY;
     for (int i = 0; i < numRows; i++){
+        bool padraoLacuna = (rand()%2 + 1 == 1) ? true : false;
+        bool padraoAltern = (rand()%2 + 1 == 1) ? true : false;
+        
+        // Duas cores para alternar
+        int corAltern1 = rand()%(maxCor + 1);
+        int corAltern2 = rand()%(maxCor + 1);
+        int corSimples = rand()%(maxCor + 1);     //Se não vamos alternar
+        
+        bool flagLacuna = (rand()%2 + 1 == 1) ? true : false;
+        bool flagAltern = (rand()%2 + 1 == 1) ? true : false;
+
         for (int j = 0; j < numCols; j++){
+            if (padraoLacuna && flagLacuna){
+                flagLacuna = !flagLacuna;   //Desativa para a próxima iteração
+                curX += TILE_H_SPACE;
+                curX += TILE_WIDTH;
+                continue;
+            }else{
+                flagLacuna = !flagLacuna;   
+            }
+
+            Cores cor;
+            // Descobrir que cor alternada colocar, se for o caso
+            if (padraoAltern && flagAltern){
+                cor = Cores(corAltern1);
+                flagAltern = !flagAltern;
+            }else{
+                cor = Cores(corAltern2);
+                flagAltern = !flagAltern;
+            }
+
+            // Descobrir a cor, se não estivermos alternando
+            if (!padraoAltern){
+                cor = Cores(corSimples);
+            }
+
             std::shared_ptr<Tile> t = \
-                std::make_shared<Tile>(curX, curY,height,TILE_WIDTH,Azul);
+                std::make_shared<Tile>(curX, curY,height,TILE_WIDTH,cor);
             this->tileMap.push_back(t);
             curX += TILE_H_SPACE;
             curX += TILE_WIDTH;
@@ -29,7 +66,9 @@ void Level::createObjects(){
         curY -= height+TILE_V_SPACE;
         curX = initX;
     }
+}
 
+void Level::createObjects(){
     // Cria o paddle
     this->paddle = std::make_shared<Paddle>(WINDOW_W/2 - PADDLE_WIDTH/2, PADDLE_Y);
     this->objects.push_back(this->paddle);
@@ -81,7 +120,7 @@ Level::Level(){
     this->gameStarted = false;
     this->displayInfo = false;
     this->displayInfoPause = false;
-    this->T_ROW = rand()%4 + 4;
+    this->createTiles();
     this->createObjects();
     this->createTextos();
 }
