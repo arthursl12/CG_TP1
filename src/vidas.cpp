@@ -2,8 +2,8 @@
 #include "vidas.h"
 #include "constants.h"
 
-Vidas::Vidas(){
-    this->vidas = 3;
+Vidas::Vidas(int _vidas = 3){
+    this->vidas = _vidas;
     this->lastLife = false;
     this->display = std::make_shared<TextoLabel>\
                 (3*WINDOW_W/4, WINDOW_H-50, "Vidas", std::to_string(vidas));
@@ -23,4 +23,8 @@ void Vidas::draw(){
 
 bool Vidas::isLastVida(){
     return this->lastLife;
+}
+
+int Vidas::getVidas(){
+    return this->vidas;
 }

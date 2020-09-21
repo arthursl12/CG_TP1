@@ -82,11 +82,11 @@ void Level::createObjects(){
     this->objects.push_back(this->speedbar);
 }
 
-void Level::createTextos(){
+void Level::createTextos(int score = 0, int vidas = 3){
     // Cria placar
-    this->placar = std::make_shared<Placar>();
+    this->placar = std::make_shared<Placar>(score);
     // Cria conta-vidas
-    this->vidas = std::make_shared<Vidas>();
+    this->vidas = std::make_shared<Vidas>(vidas);
 
     // Cria display de informações
     std::shared_ptr<TextoLabel> p1 = std::make_shared<TextoLabel> \
@@ -126,6 +126,19 @@ Level::Level(){
     this->createTiles();
     this->createObjects();
     this->createTextos();
+}
+
+Level::Level(Level& old){
+    this->score = old.score;
+    this->isPaused = true;
+    this->gameStarted = false;
+    this->displayInfo = false;
+    this->displayInfoPause = false;
+    this->gameOver = false;
+    this->levelComplete = false;
+    this->createTiles();
+    this->createObjects();
+    this->createTextos(old.placar->getPlacar(), old.vidas->getVidas());
 }
 
 void Level::setMousePos(int _x, int _y){
@@ -228,6 +241,12 @@ void Level::draw(){
         Texto t(WINDOW_W/2 - gameOverStr.size()*5, WINDOW_W/4+40, gameOverStr);
         t.draw();
     }
+    if (levelComplete){
+        std::string completeStr = "PARABENS!";
+        Texto t(WINDOW_W/2 - completeStr.size()*5, WINDOW_W/4+40, completeStr);
+        t.draw();
+        isPaused = true;
+    }
 
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
@@ -258,6 +277,9 @@ void Level::update(){
 	for (it = objects.begin(); it != objects.end(); it++) { 
 		ballCollides(**it);
     }
+    if (tileMap.size() == 0){
+        levelComplete = true;
+    }
 
     // Detectar se bola não saiu dos limites
     if (ball->isOutOfBounds() && !gameOver){
@@ -281,4 +303,13 @@ void Level::update(){
     this->textos["Paddle.y"]->updateText(std::to_string(paddle->y));
     this->textos["Paddle.dx"]->updateText(std::to_string(paddle->speed));
     this->textos["Qtd. tiles"]->updateText(std::to_string(tileMap.size()));
+}
+
+void Level::debugComplete(){
+    std::vector<std::shared_ptr<Tile>> newMap;
+    this->tileMap = newMap;
+}
+
+bool Level::isCompleted(){
+    return this->levelComplete;
 }

@@ -7,10 +7,11 @@
 
 class Vidas : public GameObject{
     public:
-        Vidas();
+        Vidas(int _vidas);
         void addVida(int qtd);
         void draw();
         bool isLastVida();
+        int getVidas();
     private:
         int vidas;
         bool lastLife;

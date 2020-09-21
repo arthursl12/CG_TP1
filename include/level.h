@@ -16,6 +16,7 @@
 class Level{
     public:
         Level();
+        Level(Level& old);
         void draw();
         void update();
 
@@ -24,6 +25,8 @@ class Level{
         void changePauseState();
         bool ballCollides(GameObject& obj);
         void changeDisplayInfoState();
+        bool isCompleted();
+        void debugComplete();
     private:
         int mouseX;
         int mouseY;
@@ -47,7 +50,7 @@ class Level{
         std::map<std::string, std::shared_ptr<TextoLabel>> textos;
 
         void createObjects();
-        void createTextos();
+        void createTextos(int score, int vidas);
         void createTiles();
         void removeTile(GameObject& tile);
 };

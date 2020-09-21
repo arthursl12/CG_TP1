@@ -6,9 +6,10 @@
 
 class Placar : public GameObject{
     public:
-        Placar();
+        Placar(int _score);
         void addScore(int _score);
         void draw();
+        int getPlacar();
     private:
         int score;
         std::shared_ptr<TextoLabel> display;

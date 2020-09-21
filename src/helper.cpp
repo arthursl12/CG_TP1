@@ -59,6 +59,11 @@ void keyboard_callback(unsigned char key, int, int){
 			glutPostRedisplay();
 			break;
 		}
+		case 'p':{
+			if (DBG){
+				lev.debugComplete();
+			}
+		}
 		case GLUT_KEY_LEFT:
 			if(sDirection != RIGHT)
 				sDirection = LEFT;
@@ -73,7 +78,15 @@ void motion_callback(int x, int y){
 
 void mouse_callback(int button, int state, int x, int y){
 	if (button == GLUT_RIGHT_BUTTON and state == GLUT_DOWN){
-		lev.changePauseState();
+		if (!lev.isCompleted()){
+			lev.changePauseState();
+		}else{
+			std::shared_ptr<Level> l1 = std::make_shared<Level>(lev);
+			lev = *l1;
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glutPostRedisplay();
+		}
 	}else if (button == GLUT_LEFT_BUTTON and state == GLUT_DOWN){
 		lev.changeDisplayInfoState();
 	}

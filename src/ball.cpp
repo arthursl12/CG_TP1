@@ -105,29 +105,30 @@ void Ball::handleCollision(GameObject& obj){
         std::cout << "xy+: " << x+width << ", " << y+height << std::endl;
         std::cout << "til: " << tile.x << ", " << tile.y << std::endl;
         std::cout << "ti+: " << tile.x+tile.width << ", " << tile.y+tile.height << std::endl;
-        if (x - 5 <= tile.x and speedX > 0){
+        if (x < tile.x and speedX > 0){
             std::cout << "esquerda" << std::endl;
             // Inverte velocidadeX e reposiciona bola fora do tile
             speedX = -speedX;
-            x = tile.x - BALL_SIZE - 1;
+            x = tile.x - width - 1;
         }
         // Lado Direito; verifica se estamos indo para esquerda
-        else if(x + 5 >= tile.x + tile.width and speedX < 0){
+        else if(x > tile.x + tile.width and speedX < 0){
             std::cout << "direita" << std::endl;
             speedX = -speedX;
-            x = tile.x + TILE_WIDTH + 1;
+            x = tile.x + tile.width + 1;
         }
-        // Abaixo
-        else if(y <= tile.y+tile.height){
-            std::cout << "baixo" << std::endl;
-            speedY = -speedY;
-            y = tile.y - height - 1;
-        }
-        // Acima, última possibilidade
-        else{
+        // Acima
+        else if(y + 5 > tile.y + tile.height){
             std::cout << "cima" << std::endl;
             speedY = -speedY;
             y = tile.y + tile.height + 1;
+
+        }
+        // Abaixo, última possibilidade
+        else{
+            std::cout << "baixo" << std::endl;
+            speedY = -speedY;
+            y = tile.y - height - 1;
         }
 
         if (abs(speedY) < BALL_MAX_Y_SPEED){
