@@ -121,6 +121,8 @@ Level::Level(){
     this->gameStarted = false;
     this->displayInfo = false;
     this->displayInfoPause = false;
+    this->gameOver = false;
+    this->levelComplete = false;
     this->createTiles();
     this->createObjects();
     this->createTextos();
@@ -155,7 +157,9 @@ bool Level::getIsPaused(){
 }
 
 void Level::changePauseState(){
-    if (!gameStarted){
+    if (gameOver){
+        exit(0);
+    }else if (!gameStarted){
         ball->randomSpeed();
         gameStarted = true;
         this->isPaused = false;
@@ -219,6 +223,11 @@ void Level::draw(){
             isPaused = true;
         }
     }
+    if (gameOver){
+        std::string gameOverStr = "GAME OVER";
+        Texto t(WINDOW_W/2 - gameOverStr.size()*5, WINDOW_W/4+40, gameOverStr);
+        t.draw();
+    }
 
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
@@ -251,17 +260,16 @@ void Level::update(){
     }
 
     // Detectar se bola não saiu dos limites
-    if (ball->isOutOfBounds()){
+    if (ball->isOutOfBounds() && !gameOver){
         if (vidas->isLastVida()){
             vidas->addVida(-1);
             this->gameStarted = false;
-            this->ball = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
-
+            this->ball = std::make_shared<Ball>(-10, -10);
+            gameOver = true;
         }else{
             vidas->addVida(-1);
             this->gameStarted = false;
             this->ball = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
-
         }
     }
 

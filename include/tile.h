@@ -6,9 +6,6 @@
 #include <memory>
 #include <map>
 
-
-
-
 class Tile: public GameObject{
     public:
         Tile(float _x, float _y, float _height, float _width, Cores cor);

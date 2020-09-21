@@ -31,6 +31,8 @@ class Level{
         bool gameStarted;
         bool displayInfo;
         bool displayInfoPause;
+        bool gameOver;
+        bool levelComplete;
         int score;
 
 
