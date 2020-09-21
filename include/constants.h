@@ -10,7 +10,7 @@
 #define WINDOW_W 700
 
 #define T_COL 10
-#define T_ROW 5
+// #define T_ROW 4
 // #define T_COL 10
 // #define T_ROW 1
 // #define TILE_WIDTH 75
@@ -19,7 +19,7 @@
 #define TILE_V_SPACE 8
 // #define MAP_X 8
 // #define MAP_Y 450
-#define MAP_OFFSET 250
+#define MAP_OFFSET 90
 
 #define PADDLE_HEIGHT 20
 #define PADDLE_WIDTH 160

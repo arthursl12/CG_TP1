@@ -33,6 +33,8 @@ class Level{
         bool displayInfoPause;
         int score;
 
+        int T_ROW;
+
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
         std::shared_ptr<Ball> ball;

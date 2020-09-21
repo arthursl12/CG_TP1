@@ -7,11 +7,11 @@
 #include "speedbar.h"
 
 void Level::createObjects(){
-    // Cria o conjunto de tiles
+    // Cria o conjunto de tiles a partir do canto superior esquerdo e descendo
     float TILE_WIDTH = (WINDOW_W - (T_COL*TILE_H_SPACE))/T_COL;
     float TILE_HEIGHT = TILE_WIDTH/2;
     float MAP_X = TILE_H_SPACE - 4;
-    // std::cout << TILE_WIDTH << std::endl;
+
     float curX = MAP_X;
     float curY = WINDOW_H - MAP_OFFSET;
     for (int i = 0; i < T_ROW; i++){
@@ -22,7 +22,7 @@ void Level::createObjects(){
             curX += TILE_H_SPACE;
             curX += TILE_WIDTH;
         }
-        curY += TILE_HEIGHT+TILE_V_SPACE;
+        curY -= TILE_HEIGHT+TILE_V_SPACE;
         curX = MAP_X;
     }
 
@@ -77,6 +77,7 @@ Level::Level(){
     this->gameStarted = false;
     this->displayInfo = false;
     this->displayInfoPause = false;
+    this->T_ROW = rand()%4 + 4;
     this->createObjects();
     this->createTextos();
 }
