@@ -75,6 +75,8 @@ Level::Level(){
     this->score = 0;
     this->isPaused = true;
     this->gameStarted = false;
+    this->displayInfo = false;
+    this->displayInfoPause = false;
     this->createObjects();
     this->createTextos();
 }
@@ -117,6 +119,25 @@ void Level::changePauseState(){
     }
 }
 
+/*
+1o clique: mostra informações e pausa (o botão de pause anda um passo)
+2o clique: solta o jogo, ainda com as informações (o botão de pause funciona normal)
+3o clique: retira as informações (jogo deve estar sem pausa, senão funciona como
+o 2o clique)
+*/
+void Level::changeDisplayInfoState(){
+    if(!isPaused and !displayInfo){
+        displayInfo = true;
+        displayInfoPause = true;
+    }else if (isPaused and displayInfo){
+        displayInfoPause = false;
+        isPaused = false;
+    }else{
+        displayInfo = false;
+        isPaused = false;
+    }
+}
+
 bool Level::ballCollides(GameObject& obj){
     if (ball->collides(obj)){
         ball->handleCollision(obj);
@@ -144,9 +165,14 @@ void Level::removeTile(GameObject& _tile){
 }
 
 void Level::draw(){
-    std::map<std::string, std::shared_ptr<TextoLabel>>::iterator it;
-    for (it = textos.begin(); it != textos.end(); it++) { 
-		it->second->draw();
+    if (displayInfo){
+            std::map<std::string, std::shared_ptr<TextoLabel>>::iterator it;
+        for (it = textos.begin(); it != textos.end(); it++) { 
+            it->second->draw();
+        }
+        if (displayInfoPause){
+            isPaused = true;
+        }
     }
 
     std::vector<std::shared_ptr<Tile>>::iterator it1;

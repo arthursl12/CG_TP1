@@ -72,10 +72,10 @@ void motion_callback(int x, int y){
 }
 
 void mouse_callback(int button, int state, int x, int y){
-	if (button == GLUT_RIGHT_BUTTON){
-        if (state == GLUT_DOWN) {
-			lev.changePauseState();
-		}
+	if (button == GLUT_RIGHT_BUTTON and state == GLUT_DOWN){
+		lev.changePauseState();
+	}else if (button == GLUT_LEFT_BUTTON and state == GLUT_DOWN){
+		lev.changeDisplayInfoState();
 	}
 }
 

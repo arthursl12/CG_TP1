@@ -15,10 +15,6 @@
 
 class Level{
     public:
-        std::vector<std::shared_ptr<Tile>> tileMap;
-        std::vector<std::shared_ptr<GameObject>> objects;
-        std::map<std::string, std::shared_ptr<TextoLabel>> textos;
-
         Level();
         void draw();
         void update();
@@ -27,17 +23,24 @@ class Level{
         bool getIsPaused();
         void changePauseState();
         bool ballCollides(GameObject& obj);
+        void changeDisplayInfoState();
     private:
         int mouseX;
         int mouseY;
         bool isPaused;
         bool gameStarted;
+        bool displayInfo;
+        bool displayInfoPause;
         int score;
+
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
         std::shared_ptr<Ball> ball;
         std::shared_ptr<Placar> placar;
         std::shared_ptr<Vidas> vidas;
+        std::vector<std::shared_ptr<Tile>> tileMap;
+        std::vector<std::shared_ptr<GameObject>> objects;
+        std::map<std::string, std::shared_ptr<TextoLabel>> textos;
 
         void createObjects();
         void createTextos();
