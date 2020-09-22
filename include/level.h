@@ -11,6 +11,7 @@
 #include "speedbar.h"
 #include "placar.h"
 #include "vidas.h"
+#include "powerup.h"
 
 
 class Level{
@@ -49,6 +50,7 @@ class Level{
         std::shared_ptr<Vidas> vidas;
         std::vector<std::shared_ptr<Tile>> tileMap;
         std::vector<std::shared_ptr<GameObject>> objects;
+        std::vector<std::shared_ptr<PowerUp>> powerups;
         std::map<std::string, std::shared_ptr<TextoLabel>> textos;
 
         void createObjects();

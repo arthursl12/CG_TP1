@@ -80,6 +80,10 @@ void Level::createObjects(){
     // Cria a barra de velocidade
     this->speedbar = std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
     this->objects.push_back(this->speedbar);
+
+    // Cria os powerups (invisíveis, por enquanto)
+    std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,40);
+    this->powerups.push_back(p1);
 }
 
 void Level::createTextos(int score = 0, int vidas = 3){
@@ -297,10 +301,18 @@ void Level::draw(){
         isPaused = true;
     }
 
+
     if (flagSpaceInvaders){
         this->spaceInvaders();
     }
     
+    std::vector<std::shared_ptr<PowerUp>>::iterator it0;
+	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) { 
+		(*it0)->draw();
+	}
+
+
+
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
 		(*it1)->draw();

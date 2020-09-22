@@ -32,6 +32,8 @@
 #define BALL_MAX_X_SPEED 7
 #define BALL_MAX_Y_SPEED 7
 
+#define POWERUP_SIZE 30
+
 #define TILE_SCORE 25
 
 #define FPS 60
