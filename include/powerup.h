@@ -30,5 +30,26 @@ class VidaPowerUp : public PowerUp {
     private:
 };
 
+class PaddleMaiorPowerUp : public PowerUp {
+    public:
+        PaddleMaiorPowerUp(float _x, float _y) : PowerUp(_x, _y) {};
+        void draw();
+    private:
+};
+
+class PaddleMenorPowerUp : public PowerUp {
+    public:
+        PaddleMenorPowerUp(float _x, float _y) : PowerUp(_x, _y) {};
+        void draw();
+    private:
+};
+
+class DuasPowerUp : public PowerUp {
+    public:
+        DuasPowerUp(float _x, float _y) : PowerUp(_x, _y) {};
+        void draw();
+    private:
+};
+
 
 #endif

@@ -84,6 +84,80 @@ void VidaPowerUp::draw(){
         glVertex2f(oX -  7, oY + 20);
         glVertex2f(oX - 10, oY + 16);
         glVertex2f(oX - 10, oY + 10);
-    glEnd(); 
-    
+    glEnd();
 }
+
+void PaddleMaiorPowerUp::draw(){
+    glColor3f(0,0.8,0.9);
+    glRectf(x, y, x+width, y+height);
+
+    float oX = x + width/2;
+    float oY = y + 5;
+    glColor3f(1,1,1);
+    glRectf(oX - 10, oY +  4, oX +  4, oY +  8);
+
+    glColor3f(0,0,0);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(oX - 10, oY +  4);
+        glVertex2f(oX +  4, oY +  4);
+        glVertex2f(oX +  4, oY +  8);
+        glVertex2f(oX - 10, oY +  8);
+    glEnd();
+    
+    glColor3f(0,0.5,0);
+    glRectf(oX + 04, oY + 07, oX + 06,  oY + 17);
+    
+    glColor3f(0,0.5,0);
+    glRectf(oX, oY + 11, oX + 10,  oY + 13);
+}
+
+void PaddleMenorPowerUp::draw(){
+    glColor3f(0,0.8,0.9);
+    glRectf(x, y, x+width, y+height);
+
+    float oX = x + width/2;
+    float oY = y + 5;
+    glColor3f(1,1,1);
+    glRectf(oX - 10, oY +  4, oX +  4, oY +  8);
+    
+    glColor3f(0,0,0);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(oX - 10, oY +  4);
+        glVertex2f(oX +  4, oY +  4);
+        glVertex2f(oX +  4, oY +  8);
+        glVertex2f(oX - 10, oY +  8);
+    glEnd();
+    
+    glColor3f(0.9,0,0);
+    glRectf(oX, oY + 11, oX + 10,  oY + 13);
+}
+
+void DuasPowerUp::draw(){
+    glColor3f(0,0.8,0.9);
+    glRectf(x, y, x+width, y+height);
+
+    float oX = x + width/2;
+    float oY = y + 5;
+    glColor3f(1,1,1);
+    glRectf(oX - 8, oY +  2, oX +  2, oY +  12);
+
+    glColor3f(0,0,0);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(oX - 8, oY +  2);
+        glVertex2f(oX + 2, oY +  2);
+        glVertex2f(oX + 2, oY + 12);
+        glVertex2f(oX - 8, oY + 12);
+    glEnd();
+
+    glColor3f(1,1,1);
+    glRectf(oX - 2, oY +  8, oX +  8, oY +  18);
+
+    glColor3f(0,0,0);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(oX - 2, oY +  8);
+        glVertex2f(oX + 8, oY +  8);
+        glVertex2f(oX + 8, oY + 18);
+        glVertex2f(oX - 2, oY + 18);
+    glEnd();
+}
+

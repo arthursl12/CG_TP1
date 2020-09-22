@@ -84,6 +84,12 @@ void Level::createObjects(){
     // Cria os powerups (invisíveis, por enquanto)
     std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,200);
     this->powerups.push_back(p1);
+    std::shared_ptr<PowerUp> p2 = std::make_shared<PaddleMaiorPowerUp>(40,250);
+    this->powerups.push_back(p2);
+    std::shared_ptr<PowerUp> p3 = std::make_shared<PaddleMenorPowerUp>(40,300);
+    this->powerups.push_back(p3);
+    std::shared_ptr<PowerUp> p4 = std::make_shared<DuasPowerUp>(40,350);
+    this->powerups.push_back(p4);
 }
 
 void Level::createTextos(int score = 0, int vidas = 3){
@@ -314,8 +320,6 @@ void Level::draw(){
             (*it0)->draw();
         }
 	}
-
-
 
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
