@@ -19,6 +19,7 @@
 #define TILE_H_SPACE 6
 #define TILE_V_SPACE 6
 #define MAP_OFFSET 90
+#define MIN_MAP_Y 400
 
 #define PADDLE_HEIGHT 20
 #define PADDLE_WIDTH 160

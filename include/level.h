@@ -36,6 +36,8 @@ class Level{
         bool displayInfoPause;
         bool gameOver;
         bool levelComplete;
+        bool flagSpaceInvaders;
+        bool flagSpaceInvadersRight;
         int score;
 
 
@@ -53,6 +55,7 @@ class Level{
         void createTextos(int score, int vidas);
         void createTiles();
         void removeTile(GameObject& tile);
+        void spaceInvaders();
 };
 
 #endif /* LEVEL_H */

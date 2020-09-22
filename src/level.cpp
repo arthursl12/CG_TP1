@@ -116,6 +116,7 @@ void Level::createTextos(int score = 0, int vidas = 3){
 }
 
 Level::Level(){
+    std::srand(time(NULL));
     this->score = 0;
     this->isPaused = true;
     this->gameStarted = false;
@@ -123,12 +124,15 @@ Level::Level(){
     this->displayInfoPause = false;
     this->gameOver = false;
     this->levelComplete = false;
+    this->flagSpaceInvaders = (std::rand()%2 + 1 == 1) ? true : false;
+    this->flagSpaceInvadersRight = true;
     this->createTiles();
     this->createObjects();
     this->createTextos();
 }
 
 Level::Level(Level& old){
+    std::srand(time(NULL));
     this->score = old.score;
     this->isPaused = true;
     this->gameStarted = false;
@@ -136,6 +140,8 @@ Level::Level(Level& old){
     this->displayInfoPause = false;
     this->gameOver = false;
     this->levelComplete = false;
+    this->flagSpaceInvaders = (std::rand()%2 + 1 == 1) ? true : false;
+    this->flagSpaceInvadersRight = true;
     this->createTiles();
     this->createObjects();
     this->createTextos(old.placar->getPlacar(), old.vidas->getVidas());
@@ -226,6 +232,49 @@ void Level::removeTile(GameObject& _tile){
 
 }
 
+void Level::spaceInvaders(){
+    std::vector<std::shared_ptr<Tile>>::iterator it1;
+    float rX = (rand()%2+1)/2;
+    float offsetX = (rX >= 0.1) ? rX : 0.1;
+    float rY = (rand()%2+1)/2;
+    float offsetY = (rY >= 0.1) ? rY : 0.1;
+    
+    bool maxX = false;
+    bool minX = false;
+    bool minY = false;
+
+	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) {
+        std::shared_ptr<Tile> t = (*it1);
+        if (t->x + t->width + offsetX > WINDOW_W)
+            maxX = true;
+        else if (t->x - offsetX < 0)
+            minX = true;
+        if (t->y - offsetY <= MIN_MAP_Y)
+            minY = true;
+	}
+    if (flagSpaceInvadersRight and maxX){
+        // Batemos no canto direito da tela
+        flagSpaceInvadersRight = !flagSpaceInvadersRight;
+    }else if (!flagSpaceInvadersRight and minX){
+        // Batemos no canto esquerdo da tela
+        flagSpaceInvadersRight = !flagSpaceInvadersRight;
+    }
+
+    for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) {
+        std::shared_ptr<Tile> t = (*it1);
+        if (flagSpaceInvadersRight){
+            t->x += offsetX;
+        }else{
+            t->x -= offsetX;
+        }
+        if ((maxX || minX) && !minY){
+            t->y -= offsetY;
+        }
+	}
+
+
+}
+
 void Level::draw(){
     if (displayInfo){
             std::map<std::string, std::shared_ptr<TextoLabel>>::iterator it;
@@ -248,6 +297,11 @@ void Level::draw(){
         isPaused = true;
     }
 
+    std::cout << "sp: " << flagSpaceInvaders << std::endl;
+    if (flagSpaceInvaders){
+        this->spaceInvaders();
+    }
+    
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
 		(*it1)->draw();
