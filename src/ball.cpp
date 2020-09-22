@@ -105,14 +105,14 @@ void Ball::handleCollision(GameObject& obj){
         std::cout << "xy+: " << x+width << ", " << y+height << std::endl;
         std::cout << "til: " << tile.x << ", " << tile.y << std::endl;
         std::cout << "ti+: " << tile.x+tile.width << ", " << tile.y+tile.height << std::endl;
-        if (x - width <= tile.x and speedX > 0){
+        if (x + width - 5 <= tile.x && (y > tile.y - height || y < tile.y + tile.height)  && speedX > 0){
             std::cout << "esquerda" << std::endl;
             // Inverte velocidadeX e reposiciona bola fora do tile
             speedX = -speedX;
             x = tile.x - width - 1;
         }
         // Lado Direito; verifica se estamos indo para esquerda
-        else if(x + width >= tile.x + tile.width and speedX < 0){
+        else if(x + 5 >= tile.x + tile.width && (y < tile.y - height || y < tile.y + tile.height) && speedX < 0){
             std::cout << "direita" << std::endl;
             speedX = -speedX;
             x = tile.x + tile.width + 1;

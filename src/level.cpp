@@ -297,7 +297,6 @@ void Level::draw(){
         isPaused = true;
     }
 
-    std::cout << "sp: " << flagSpaceInvaders << std::endl;
     if (flagSpaceInvaders){
         this->spaceInvaders();
     }
@@ -324,6 +323,7 @@ void Level::update(){
 		if (ballCollides(**it1)){
             score += TILE_SCORE;
             placar->addScore(TILE_SCORE);
+            isPaused = true;
             break;
         }
 	}
