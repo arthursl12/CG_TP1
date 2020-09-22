@@ -12,9 +12,15 @@ class PowerUp : public GameObject{
     public:
         PowerUp(float _x, float _y);
         void draw() = 0;
+        void update();
+        void spawnAt(float _x, float _y);
+        bool isInPlay();
     private:
         bool inPlay;
+        float dx;
+        float dy;
 
+        void reset();
 };
 
 class VidaPowerUp : public PowerUp {
@@ -24,10 +30,5 @@ class VidaPowerUp : public PowerUp {
     private:
 };
 
-class TripleStrategy {
-   static double especific(double data) {
-      return 3 * data;
-   }
-};
 
 #endif

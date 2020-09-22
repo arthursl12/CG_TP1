@@ -33,6 +33,10 @@
 #define BALL_MAX_Y_SPEED 7
 
 #define POWERUP_SIZE 30
+#define POWERUP_MAX_DY 2
+#define POWERUP_MAX_DX 3
+#define POWERUP_ACC 0.05
+#define POWERUP_CHANCE 0.8
 
 #define TILE_SCORE 25
 

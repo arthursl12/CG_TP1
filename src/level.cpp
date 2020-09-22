@@ -82,7 +82,7 @@ void Level::createObjects(){
     this->objects.push_back(this->speedbar);
 
     // Cria os powerups (invisíveis, por enquanto)
-    std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,40);
+    std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,200);
     this->powerups.push_back(p1);
 }
 
@@ -130,6 +130,7 @@ Level::Level(){
     this->levelComplete = false;
     this->flagSpaceInvaders = (std::rand()%2 + 1 == 1) ? true : false;
     this->flagSpaceInvadersRight = true;
+    this->flagPowerUpSpawned = false;
     this->createTiles();
     this->createObjects();
     this->createTextos();
@@ -146,6 +147,7 @@ Level::Level(Level& old){
     this->levelComplete = false;
     this->flagSpaceInvaders = (std::rand()%2 + 1 == 1) ? true : false;
     this->flagSpaceInvadersRight = true;
+    this->flagPowerUpSpawned = false;
     this->createTiles();
     this->createObjects();
     this->createTextos(old.placar->getPlacar(), old.vidas->getVidas());
@@ -307,8 +309,10 @@ void Level::draw(){
     }
     
     std::vector<std::shared_ptr<PowerUp>>::iterator it0;
-	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) { 
-		(*it0)->draw();
+	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
+        if ((*it0)->isInPlay()){
+            (*it0)->draw();
+        }
 	}
 
 
@@ -328,6 +332,16 @@ void Level::draw(){
     ball->draw();
 }
 
+void Level::spawnPowerUp(float x, float y){
+    bool spawn = (std::rand()%100 + 1 <= POWERUP_CHANCE*100) ? true : false;
+    if (spawn && !flagPowerUpSpawned){
+        std::vector<std::shared_ptr<PowerUp>>::iterator it = powerups.begin();
+        std::advance(it, std::rand() % powerups.size());
+        (*it)->spawnAt(x + PADDLE_WIDTH/2, y);
+        flagPowerUpSpawned = !flagPowerUpSpawned;
+    }
+}
+
 void Level::update(){
     //Collision check
     std::vector<std::shared_ptr<Tile>>::iterator it1;
@@ -335,7 +349,8 @@ void Level::update(){
 		if (ballCollides(**it1)){
             score += TILE_SCORE;
             placar->addScore(TILE_SCORE);
-            isPaused = true;
+            this->spawnPowerUp((*it1)->x, (*it1)->y);
+            // isPaused = true;
             break;
         }
 	}
@@ -346,6 +361,15 @@ void Level::update(){
     if (tileMap.size() == 0){
         levelComplete = true;
     }
+
+    // Movimentar o powerup
+    std::vector<std::shared_ptr<PowerUp>>::iterator it0;
+	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
+        if ((*it0)->isInPlay()){
+            (*it0)->update();
+        }
+	}
+
 
     // Detectar se bola não saiu dos limites
     if (ball->isOutOfBounds() && !gameOver){
@@ -361,6 +385,7 @@ void Level::update(){
         }
     }
 
+    // Update nos textos do display
     this->textos["Bola.x"]->updateText(std::to_string(ball->x));
     this->textos["Bola.y"]->updateText(std::to_string(ball->y));
     this->textos["Bola.dx"]->updateText(std::to_string(ball->speedX));

@@ -39,6 +39,7 @@ class Level{
         bool levelComplete;
         bool flagSpaceInvaders;
         bool flagSpaceInvadersRight;
+        bool flagPowerUpSpawned;
         int score;
 
 
@@ -58,6 +59,7 @@ class Level{
         void createTiles();
         void removeTile(GameObject& tile);
         void spaceInvaders();
+        void spawnPowerUp(float x, float y);
 };
 
 #endif /* LEVEL_H */
