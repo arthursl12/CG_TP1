@@ -71,4 +71,19 @@ void PowerUp::reset(){
 void VidaPowerUp::draw(){
     glColor3f(1,0.5,1);
     glRectf(x, y, x+width, y+height);
+
+    glColor3f(1,0,0);
+    float oX = x + width/2;
+    float oY = y + 5;
+    glBegin(GL_TRIANGLE_FAN);
+        glVertex2f(oX, oY);
+        glVertex2f(oX + 10, oY + 10);
+        glVertex2f(oX + 10, oY + 16);
+        glVertex2f(oX +  7, oY + 20);
+        glVertex2f(oX     , oY + 14);
+        glVertex2f(oX -  7, oY + 20);
+        glVertex2f(oX - 10, oY + 16);
+        glVertex2f(oX - 10, oY + 10);
+    glEnd(); 
+    
 }

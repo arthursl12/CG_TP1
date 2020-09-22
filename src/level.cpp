@@ -310,7 +310,7 @@ void Level::draw(){
     
     std::vector<std::shared_ptr<PowerUp>>::iterator it0;
 	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
-        if ((*it0)->isInPlay()){
+        if ((*it0)->isInPlay() || DBG){
             (*it0)->draw();
         }
 	}
