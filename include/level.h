@@ -49,7 +49,7 @@ class Level{
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;
         std::shared_ptr<Ball> ball;
-        // std::shared_ptr<Ball> ball2;
+        std::shared_ptr<Ball> ball2;
         std::shared_ptr<Placar> placar;
         std::shared_ptr<Vidas> vidas;
         std::vector<std::shared_ptr<Tile>> tileMap;

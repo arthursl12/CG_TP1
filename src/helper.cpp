@@ -52,8 +52,7 @@ void keyboard_callback(unsigned char key, int, int){
 			exit(0);
 			break;
 		case 'r':{
-			std::shared_ptr<Level> l1 = std::make_shared<Level>();
-			lev = *l1;
+			lev = Level(lev);
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glutPostRedisplay();
@@ -81,8 +80,7 @@ void mouse_callback(int button, int state, int x, int y){
 		if (!lev.isCompleted()){
 			lev.changePauseState();
 		}else{
-			std::shared_ptr<Level> l1 = std::make_shared<Level>(lev);
-			lev = *l1;
+			lev = Level(lev);
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glutPostRedisplay();
