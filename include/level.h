@@ -25,6 +25,7 @@ class Level{
         bool getIsPaused();
         void changePauseState();
         bool ballCollides(GameObject& obj);
+        bool powerUpCollides(PowerUp& pw);
         void changeDisplayInfoState();
         bool isCompleted();
         void debugComplete();

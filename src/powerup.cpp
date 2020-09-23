@@ -19,7 +19,6 @@ void PowerUp::update(){
         int rand = std::rand()%2;
         if (rand != 0){ 
             int rand2 = std::rand()%10 + 1;
-            std::cout << "rand2: " << rand2 << std::endl;
             if (rand2 >= 6 && abs(dy) < POWERUP_MAX_DY){
                 dy *= (1 + POWERUP_ACC*rand);
             }else if (rand2 >=4 && abs(dx) < POWERUP_MAX_DX){
@@ -29,15 +28,15 @@ void PowerUp::update(){
 
         // Ricochetear nas paredes
         if (x <= 0){
-            x = 0;
+            x = 1;
             dx = -dx;
         }
         if (x >= WINDOW_W - width) {
-            x = WINDOW_W - width;
+            x = WINDOW_W - width - 1;
             dx = dx;
         }
         if (y >= WINDOW_H - height){
-            y = WINDOW_H - height;
+            y = WINDOW_H - height - 1;
             dy = -dy;
         }
 

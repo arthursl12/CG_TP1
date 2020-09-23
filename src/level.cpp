@@ -230,6 +230,22 @@ bool Level::ballCollides(GameObject& obj){
     return false;
 }
 
+bool Level::powerUpCollides(PowerUp& pw){
+    if (paddle->collides(pw)){
+        pw.reset();
+        flagPowerUpSpawned = !flagPowerUpSpawned;
+        if (pw.nome == "PUvida")
+            this->vidas->addVida(1);
+        else if (pw.nome == "PUmaior")
+            std::cout << "Maior" << std::endl;
+        else if (pw.nome == "PUmenor")
+            std::cout << "Menor" << std::endl;
+        else if (pw.nome == "PUduas")
+            std::cout << "Duas" << std::endl;
+    }
+    return false;
+}
+
 void Level::removeTile(GameObject& _tile){
     Tile& tile = dynamic_cast<Tile&>(_tile);
     std::vector<std::shared_ptr<Tile>>::iterator it1;
@@ -316,7 +332,7 @@ void Level::draw(){
     
     std::vector<std::shared_ptr<PowerUp>>::iterator it0;
 	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
-        if ((*it0)->isInPlay() || DBG){
+        if ((*it0)->isInPlay()){
             (*it0)->draw();
         }
 	}
@@ -334,6 +350,7 @@ void Level::draw(){
     placar->draw();
     vidas->draw();
     ball->draw();
+    std::cout << "PUSPAW: " << flagPowerUpSpawned << std::endl;
 }
 
 void Level::spawnPowerUp(float x, float y){
@@ -347,7 +364,7 @@ void Level::spawnPowerUp(float x, float y){
 }
 
 void Level::update(){
-    //Collision check
+    // Colisão bola-tile
     std::vector<std::shared_ptr<Tile>>::iterator it1;
 	for (it1 = tileMap.begin(); it1 != tileMap.end(); it1++) { 
 		if (ballCollides(**it1)){
@@ -358,6 +375,8 @@ void Level::update(){
             break;
         }
 	}
+
+    // Colisão bola-paddle
 	std::vector<std::shared_ptr<GameObject>>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++) { 
 		ballCollides(**it);
@@ -366,13 +385,30 @@ void Level::update(){
         levelComplete = true;
     }
 
-    // Movimentar o powerup
+    // Colisão powerup-paddle
     std::vector<std::shared_ptr<PowerUp>>::iterator it0;
+	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
+        if ((*it0)->isInPlay()){
+            powerUpCollides(**it0);
+        }
+	}
+
+    // Movimentar o powerup
 	for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
         if ((*it0)->isInPlay()){
             (*it0)->update();
         }
 	}
+
+    bool anyPU = false;
+    for (it0 = powerups.begin(); it0 != powerups.end(); it0++) {
+        if ((*it0)->isInPlay()){
+            anyPU = true;
+        }
+	}
+    if (anyPU){
+        flagPowerUpSpawned = true;
+    }
 
 
     // Detectar se bola não saiu dos limites
