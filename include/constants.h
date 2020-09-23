@@ -3,9 +3,6 @@
 
 #define DBG true
 
-#define COLUMNS 40
-#define ROWS 40
-
 #define WINDOW_H 800
 #define WINDOW_W 900
 

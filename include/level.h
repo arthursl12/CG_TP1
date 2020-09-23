@@ -13,7 +13,6 @@
 #include "vidas.h"
 #include "powerup.h"
 
-
 class Level{
     public:
         Level();
@@ -43,8 +42,6 @@ class Level{
         bool flagPowerUpSpawned;
         bool flagDoubleBallSpawned;
         int score;
-
-
 
         std::shared_ptr<SpeedBar> speedbar;
         std::shared_ptr<Paddle> paddle;

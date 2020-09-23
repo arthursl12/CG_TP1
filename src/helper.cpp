@@ -7,7 +7,6 @@
 #include <vector>
 #include <iterator>
 
-#include "game.h"
 #include "level.h"
 #include "gObject.h"
 #include "tile.h"
@@ -63,10 +62,6 @@ void keyboard_callback(unsigned char key, int, int){
 				lev.debugComplete();
 			}
 		}
-		case GLUT_KEY_LEFT:
-			if(sDirection != RIGHT)
-				sDirection = LEFT;
-			break;
 	}
 }
 
