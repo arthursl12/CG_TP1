@@ -15,7 +15,6 @@ Tile::Tile(float _x, float _y, float _height, float _width, Cores cor){
 }
 
 void Tile::draw(){
-    // std::cout << this->x << ", " << this->y << std::endl;
     glColor3f(std::get<0>(corRGB),std::get<1>(corRGB),std::get<2>(corRGB));
     glRectf(x, y, x+width, y+height);
 

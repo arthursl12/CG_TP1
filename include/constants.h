@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define DBG true
+#define DBG false
 
 #define WINDOW_H 800
 #define WINDOW_W 900
@@ -27,7 +27,6 @@
 #define MOUSE_CENTER_TOLERANCE 20
 #define MAX_WIDTH_SPEED_BAR 150
 
-
 #define BALL_SIZE 10
 #define BALL_MAX_X_SPEED 7
 #define BALL_MAX_Y_SPEED 7
@@ -36,7 +35,7 @@
 #define POWERUP_MAX_DY 1.5
 #define POWERUP_MAX_DX 2
 #define POWERUP_ACC 0.05
-#define POWERUP_CHANCE 0.8
+#define POWERUP_CHANCE 0.3
 
 #define TILE_SCORE 25
 

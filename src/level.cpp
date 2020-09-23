@@ -229,7 +229,6 @@ bool Level::ballCollides(GameObject& obj){
             this->removeTile(obj);
             return true;
         }
-        // std::cout << "Colide3" << "Obj: " << std::endl;
     }
     if (ball2 && ball2->collides(obj)){
         ball2->handleCollision(obj);
@@ -372,6 +371,7 @@ void Level::spawnPowerUp(float x, float y){
     bool spawn = (std::rand()%100 + 1 <= POWERUP_CHANCE*100) ? true : false;
     if (spawn && !flagPowerUpSpawned){
         std::vector<std::shared_ptr<PowerUp>>::iterator it = powerups.begin();
+        std::srand(time(NULL));
         std::advance(it, std::rand() % powerups.size());
         (*it)->spawnAt(x, y);
         flagPowerUpSpawned = !flagPowerUpSpawned;

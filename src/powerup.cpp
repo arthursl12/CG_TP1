@@ -20,13 +20,11 @@ void PowerUp::update(){
         if (rand != 0){ 
             int rand2 = std::rand()%10 + 1;
             if (rand2 >= 6 && abs(dy) < POWERUP_MAX_DY){
-                std::cout << "dx = " << dx << ", dy = " << dy << std::endl;
                 dy *= (1 + POWERUP_ACC*rand);
             }else if (rand2 >=4 && abs(dx) < POWERUP_MAX_DX){
                 dx *= (1 + POWERUP_ACC*rand);
             }
         }
-        std::cout << "dx = " << dx << ", dy = " << dy << std::endl;
 
         // Ricochetear nas paredes
         if (x <= 0){

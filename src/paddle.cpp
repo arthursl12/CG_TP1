@@ -13,7 +13,6 @@ Paddle::Paddle(float _x, float _y){
 }
 
 void Paddle::draw(){
-    // std::cout << this->x << ", " << this->y << std::endl;~
     float newX = x + speed;
     if (newX <= 0){
         newX = 0;
@@ -35,7 +34,6 @@ void Paddle::draw(){
 }
 
 void Paddle::setSpeed(float v){
-    // std::cout << this->x << ", " << this->y << std::endl;
     if (v > PADDLE_MAX_SPEED){
         this->speed = PADDLE_MAX_SPEED;
     }else if (v < -PADDLE_MAX_SPEED){

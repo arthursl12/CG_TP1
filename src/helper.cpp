@@ -23,18 +23,12 @@ void display_callback(){
 	lev.draw();
 	lev.update();
 	glutSwapBuffers();
-
-	// if (gameOver){
-	// 	std::cout << "GAME OVER " << "Your Score: " << score << std::endl;
-	// 	exit(0);
-	// }
-	
 }
 
 void reshape_callback(int w, int h){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-	// glViewport(0,0,(GLsizei)w,(GLsizei)h);
+
 	float deltaW = w - WINDOW_W;
 	float deltaH = h - WINDOW_H;
 	glViewport(deltaW/2, deltaH/2, WINDOW_W, WINDOW_H);
@@ -66,7 +60,6 @@ void keyboard_callback(unsigned char key, int, int){
 }
 
 void motion_callback(int x, int y){
-	// std::cout << "X: " << x << ", Y: " << y << std::endl;
 	lev.setMousePos(x, y);
 }
 

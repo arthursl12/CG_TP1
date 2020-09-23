@@ -63,11 +63,11 @@ void Ball::randomSpeed(){
     if (firstMove){
         firstMove = false;
         //Velocidade em X aleatória
-        speedX = rand()%(BALL_MAX_X_SPEED/2)+3;
+        speedX = std::rand()%(BALL_MAX_X_SPEED/2)+3;
         speedX *= pow(-1, rand()%2);
 
         //Velocidade em Y aleatória
-        speedY = rand()%(BALL_MAX_Y_SPEED/2)+4;
+        speedY = std::rand()%(BALL_MAX_Y_SPEED/2)+4;
     }
 }
 
@@ -100,33 +100,33 @@ void Ball::handleCollision(GameObject& obj){
         }
     }else if (obj.nome == "tile"){
         Tile& tile = dynamic_cast<Tile&>(obj);
+       
+        if (DBG){
+            std::cout << "x,y: " << x << ", " << y << std::endl;
+            std::cout << "xy+: " << x+width << ", " << y+height << std::endl;
+            std::cout << "til: " << tile.x << ", " << tile.y << std::endl;
+            std::cout << "ti+: " << tile.x+tile.width << ", " << tile.y+tile.height << std::endl;
+        }
+
         // Lado Esquerdo; verifica se estamos indo para direita
-        std::cout << "x,y: " << x << ", " << y << std::endl;
-        std::cout << "xy+: " << x+width << ", " << y+height << std::endl;
-        std::cout << "til: " << tile.x << ", " << tile.y << std::endl;
-        std::cout << "ti+: " << tile.x+tile.width << ", " << tile.y+tile.height << std::endl;
         if (x + width - 5 <= tile.x && (y > tile.y - height || y < tile.y + tile.height)  && speedX > 0){
-            std::cout << "esquerda" << std::endl;
             // Inverte velocidadeX e reposiciona bola fora do tile
             speedX = -speedX;
             x = tile.x - width - 1;
         }
-        // Lado Direito; verifica se estamos indo para esquerda
+        // lado Direito: verifica se estamos indo para esquerda
         else if(x + 5 >= tile.x + tile.width && (y < tile.y - height || y < tile.y + tile.height) && speedX < 0){
-            std::cout << "direita" << std::endl;
             speedX = -speedX;
             x = tile.x + tile.width + 1;
         }
         // Acima
         else if(y + 6 > tile.y + tile.height){
-            std::cout << "cima" << std::endl;
             speedY = -speedY;
             y = tile.y + tile.height + 1;
 
         }
         // Abaixo, última possibilidade
         else{
-            std::cout << "baixo" << std::endl;
             speedY = -speedY;
             y = tile.y - height - 1;
         }

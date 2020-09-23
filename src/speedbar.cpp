@@ -15,7 +15,6 @@ SpeedBar::SpeedBar(float _x, float _y){
 
 void SpeedBar::draw(){
     float deltaY = (markHeight - PADDLE_HEIGHT)/2 + 1;
-    // std::cout << "Speed: " << speed << ", W: " << barWidth << std::endl;
     glColor3f(1,1,1);
     glRectf(x, y+deltaY, x+barWidth, y+PADDLE_HEIGHT);
 
