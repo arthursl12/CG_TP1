@@ -44,3 +44,7 @@ void Paddle::setSpeed(float v){
         this->speed = v;
     }
 }
+
+void Paddle::changeSize(int newSize){
+    this->width = newSize;
+}

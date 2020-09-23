@@ -82,14 +82,14 @@ void Level::createObjects(){
     this->objects.push_back(this->speedbar);
 
     // Cria os powerups (invisíveis, por enquanto)
-    std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,200);
-    this->powerups.push_back(p1);
+    // std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,200);
+    // this->powerups.push_back(p1);
     std::shared_ptr<PowerUp> p2 = std::make_shared<PaddleMaiorPowerUp>(40,250);
     this->powerups.push_back(p2);
     std::shared_ptr<PowerUp> p3 = std::make_shared<PaddleMenorPowerUp>(40,300);
     this->powerups.push_back(p3);
-    std::shared_ptr<PowerUp> p4 = std::make_shared<DuasPowerUp>(40,350);
-    this->powerups.push_back(p4);
+    // std::shared_ptr<PowerUp> p4 = std::make_shared<DuasPowerUp>(40,350);
+    // this->powerups.push_back(p4);
 }
 
 void Level::createTextos(int score = 0, int vidas = 3){
@@ -237,9 +237,9 @@ bool Level::powerUpCollides(PowerUp& pw){
         if (pw.nome == "PUvida")
             this->vidas->addVida(1);
         else if (pw.nome == "PUmaior")
-            std::cout << "Maior" << std::endl;
+            this->paddle->changeSize(PADDLE_MAX_W);
         else if (pw.nome == "PUmenor")
-            std::cout << "Menor" << std::endl;
+            this->paddle->changeSize(PADDLE_MIN_W);
         else if (pw.nome == "PUduas")
             std::cout << "Duas" << std::endl;
     }
@@ -350,7 +350,6 @@ void Level::draw(){
     placar->draw();
     vidas->draw();
     ball->draw();
-    std::cout << "PUSPAW: " << flagPowerUpSpawned << std::endl;
 }
 
 void Level::spawnPowerUp(float x, float y){
@@ -358,7 +357,7 @@ void Level::spawnPowerUp(float x, float y){
     if (spawn && !flagPowerUpSpawned){
         std::vector<std::shared_ptr<PowerUp>>::iterator it = powerups.begin();
         std::advance(it, std::rand() % powerups.size());
-        (*it)->spawnAt(x + PADDLE_WIDTH/2, y);
+        (*it)->spawnAt(x, y);
         flagPowerUpSpawned = !flagPowerUpSpawned;
     }
 }

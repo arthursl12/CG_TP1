@@ -10,6 +10,7 @@ class Paddle: public GameObject{
         Paddle(float _x, float _y);
         void draw();
         void setSpeed(float v);
+        void changeSize(int delta);
     private:
         float speed;
 };
