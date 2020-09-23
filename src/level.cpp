@@ -81,15 +81,15 @@ void Level::createObjects(){
     this->speedbar = std::make_shared<SpeedBar>(WINDOW_W/2, 12.5);
     this->objects.push_back(this->speedbar);
 
-    // Cria os powerups (invisíveis, por enquanto)
-    // std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(40,200);
-    // this->powerups.push_back(p1);
-    std::shared_ptr<PowerUp> p2 = std::make_shared<PaddleMaiorPowerUp>(40,250);
+    // Cria os powerups (invisíveis, quando inicializados)
+    std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(-100,-100);
+    this->powerups.push_back(p1);
+    std::shared_ptr<PowerUp> p2 = std::make_shared<PaddleMaiorPowerUp>(-100,-100);
     this->powerups.push_back(p2);
-    std::shared_ptr<PowerUp> p3 = std::make_shared<PaddleMenorPowerUp>(40,300);
+    std::shared_ptr<PowerUp> p3 = std::make_shared<PaddleMenorPowerUp>(-100,-100);
     this->powerups.push_back(p3);
-    // std::shared_ptr<PowerUp> p4 = std::make_shared<DuasPowerUp>(40,350);
-    // this->powerups.push_back(p4);
+    std::shared_ptr<PowerUp> p4 = std::make_shared<DuasPowerUp>(-100,-100);
+    this->powerups.push_back(p4);
 }
 
 void Level::createTextos(int score = 0, int vidas = 3){
@@ -407,6 +407,8 @@ void Level::update(){
 	}
     if (anyPU){
         flagPowerUpSpawned = true;
+    }else{
+        flagPowerUpSpawned = false;
     }
 
 
