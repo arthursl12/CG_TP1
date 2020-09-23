@@ -82,12 +82,12 @@ void Level::createObjects(){
     this->objects.push_back(this->speedbar);
 
     // Cria os powerups (invisíveis, quando inicializados)
-    std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(-100,-100);
-    this->powerups.push_back(p1);
-    std::shared_ptr<PowerUp> p2 = std::make_shared<PaddleMaiorPowerUp>(-100,-100);
-    this->powerups.push_back(p2);
-    std::shared_ptr<PowerUp> p3 = std::make_shared<PaddleMenorPowerUp>(-100,-100);
-    this->powerups.push_back(p3);
+    // std::shared_ptr<PowerUp> p1 = std::make_shared<VidaPowerUp>(-100,-100);
+    // this->powerups.push_back(p1);
+    // std::shared_ptr<PowerUp> p2 = std::make_shared<PaddleMaiorPowerUp>(-100,-100);
+    // this->powerups.push_back(p2);
+    // std::shared_ptr<PowerUp> p3 = std::make_shared<PaddleMenorPowerUp>(-100,-100);
+    // this->powerups.push_back(p3);
     std::shared_ptr<PowerUp> p4 = std::make_shared<DuasPowerUp>(-100,-100);
     this->powerups.push_back(p4);
 }
@@ -134,6 +134,8 @@ Level::Level(){
     this->displayInfoPause = false;
     this->gameOver = false;
     this->levelComplete = false;
+    this->flagDoubleBallSpawned = false;
+    // this->ball2 = std::shared_ptr<Ball>(nullptr);
     this->flagSpaceInvaders = (std::rand()%2 + 1 == 1) ? true : false;
     this->flagSpaceInvadersRight = true;
     this->flagPowerUpSpawned = false;
@@ -151,9 +153,11 @@ Level::Level(Level& old){
     this->displayInfoPause = false;
     this->gameOver = false;
     this->levelComplete = false;
+    this->flagDoubleBallSpawned = false;
     this->flagSpaceInvaders = (std::rand()%2 + 1 == 1) ? true : false;
     this->flagSpaceInvadersRight = true;
     this->flagPowerUpSpawned = false;
+    // this->ball2 = std::shared_ptr<Ball>(nullptr);
     this->createTiles();
     this->createObjects();
     this->createTextos(old.placar->getPlacar(), old.vidas->getVidas());
@@ -227,6 +231,13 @@ bool Level::ballCollides(GameObject& obj){
         }
         // std::cout << "Colide3" << "Obj: " << std::endl;
     }
+    // if (ball2 && ball2->collides(obj)){
+    //     ball2->handleCollision(obj);
+    //     if (obj.getNome() == "tile"){
+    //         this->removeTile(obj);
+    //         return true;
+    //     }
+    // }
     return false;
 }
 
@@ -234,14 +245,17 @@ bool Level::powerUpCollides(PowerUp& pw){
     if (paddle->collides(pw)){
         pw.reset();
         flagPowerUpSpawned = !flagPowerUpSpawned;
-        if (pw.nome == "PUvida")
+        if (pw.nome == "PUvida"){
             this->vidas->addVida(1);
-        else if (pw.nome == "PUmaior")
+        }else if (pw.nome == "PUmaior"){
             this->paddle->changeSize(PADDLE_MAX_W);
-        else if (pw.nome == "PUmenor")
+        }else if (pw.nome == "PUmenor"){
             this->paddle->changeSize(PADDLE_MIN_W);
-        else if (pw.nome == "PUduas")
-            std::cout << "Duas" << std::endl;
+        }else if (pw.nome == "PUduas"){
+        // }else if (pw.nome == "PUduas" && !flagDoubleBallSpawned){
+            // this->ball2 = std::make_shared<Ball>(WINDOW_W/2 - BALL_SIZE/2, WINDOW_W/4+40);
+            // this->ball2->randomSpeed();
+        }
     }
     return false;
 }
@@ -350,6 +364,8 @@ void Level::draw(){
     placar->draw();
     vidas->draw();
     ball->draw();
+    // if (ball2)
+    //     ball2->draw();
 }
 
 void Level::spawnPowerUp(float x, float y){
@@ -413,6 +429,16 @@ void Level::update(){
 
 
     // Detectar se bola não saiu dos limites
+    // if (ball2 && ball2->isOutOfBounds() && !gameOver){
+    //     if (vidas->isLastVida()){
+    //         vidas->addVida(-1);
+    //         gameOver = true;
+    //         ball2 = std::shared_ptr<Ball>(nullptr);;
+    //     }else{
+    //         vidas->addVida(-1);
+    //         ball2 = std::shared_ptr<Ball>(nullptr);;
+    //     }
+    // }
     if (ball->isOutOfBounds() && !gameOver){
         if (vidas->isLastVida()){
             vidas->addVida(-1);
