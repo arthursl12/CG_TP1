@@ -6,8 +6,8 @@ PowerUp::PowerUp(float _x, float _y){
     this->height = POWERUP_SIZE;
     this->x = _x;
     this->y = _y;
-    this->dx = (std::rand()%2 + 1 == 1) ? 0.1 : -0.1;
-    this->dy = -0.1;
+    this->dx = (std::rand()%2 + 1 == 1) ? 0.3 : -0.3;
+    this->dy = -0.3;
     this->inPlay = false;
 }
 
@@ -20,11 +20,13 @@ void PowerUp::update(){
         if (rand != 0){ 
             int rand2 = std::rand()%10 + 1;
             if (rand2 >= 6 && abs(dy) < POWERUP_MAX_DY){
+                std::cout << "dx = " << dx << ", dy = " << dy << std::endl;
                 dy *= (1 + POWERUP_ACC*rand);
             }else if (rand2 >=4 && abs(dx) < POWERUP_MAX_DX){
                 dx *= (1 + POWERUP_ACC*rand);
             }
         }
+        std::cout << "dx = " << dx << ", dy = " << dy << std::endl;
 
         // Ricochetear nas paredes
         if (x <= 0){
@@ -33,7 +35,7 @@ void PowerUp::update(){
         }
         if (x >= WINDOW_W - width) {
             x = WINDOW_W - width - 1;
-            dx = dx;
+            dx = -dx;
         }
         if (y >= WINDOW_H - height){
             y = WINDOW_H - height - 1;
@@ -54,8 +56,8 @@ bool PowerUp::isInPlay(){
 void PowerUp::spawnAt(float _x, float _y){
     this->x = _x;
     this->y = _y;
-    this->dx = (std::rand()%2 + 1 == 1) ? 0.1 : -0.1;
-    this->dy = -0.1;
+    this->dx = (std::rand()%2 + 1 == 1) ? 0.3 : -0.3;
+    this->dy = -0.3;
     this->inPlay = true;
 }
 

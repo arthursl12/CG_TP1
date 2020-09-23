@@ -38,7 +38,7 @@
 #define POWERUP_SIZE 30
 #define POWERUP_MAX_DY 1.5
 #define POWERUP_MAX_DX 2
-#define POWERUP_ACC 0.005
+#define POWERUP_ACC 0.05
 #define POWERUP_CHANCE 0.8
 
 #define TILE_SCORE 25

@@ -48,3 +48,10 @@ void Paddle::setSpeed(float v){
 void Paddle::changeSize(int newSize){
     this->width = newSize;
 }
+
+bool Paddle::isStuck(){
+    if (x <= 0 || x + width >= WINDOW_W)
+        return true;
+    else
+        return false;
+}

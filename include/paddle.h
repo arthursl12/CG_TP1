@@ -11,6 +11,7 @@ class Paddle: public GameObject{
         void draw();
         void setSpeed(float v);
         void changeSize(int delta);
+        bool isStuck();
     private:
         float speed;
 };
