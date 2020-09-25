@@ -326,17 +326,7 @@ void Level::draw(){
             isPaused = true;
         }
     }
-    if (gameOver){
-        std::string gameOverStr = "GAME OVER";
-        Texto t(WINDOW_W/2 - gameOverStr.size()*5, WINDOW_W/4+40, gameOverStr);
-        t.draw();
-    }
-    if (levelComplete){
-        std::string completeStr = "PARABENS!";
-        Texto t(WINDOW_W/2 - completeStr.size()*5, WINDOW_W/4+40, completeStr);
-        t.draw();
-        isPaused = true;
-    }
+
 
 
     if (flagSpaceInvaders){
@@ -365,9 +355,22 @@ void Level::draw(){
     ball->draw();
     if (ball2)
         ball2->draw();
+
+    if (gameOver){
+        std::string gameOverStr = "GAME OVER";
+        Texto t(WINDOW_W/2 - gameOverStr.size()*5, WINDOW_W/4+40, gameOverStr);
+        t.draw();
+    }
+    if (levelComplete){
+        std::string completeStr = "PARABENS!";
+        Texto t(WINDOW_W/2 - completeStr.size()*5, WINDOW_W/4+40, completeStr);
+        t.draw();
+        isPaused = true;
+    }
 }
 
 void Level::spawnPowerUp(float x, float y){
+    std::srand(time(NULL));
     bool spawn = (std::rand()%100 + 1 <= POWERUP_CHANCE*100) ? true : false;
     if (spawn && !flagPowerUpSpawned){
         std::vector<std::shared_ptr<PowerUp>>::iterator it = powerups.begin();
